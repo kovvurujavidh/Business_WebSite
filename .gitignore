@@ -32,10 +32,24 @@ yarn-error.log*
 
 # env files (can opt-in for committing if needed)
 .env*
+!.env.example
 
 # vercel
 .vercel
 
+# prisma
+prisma/dev.db
+prisma/dev.db-journal
+
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# AI tool configs
+.agents/
+.claude/
+.cursor/
+.devin/
+
+# screenshots
+screenshots/

@@ -1,0 +1,93 @@
+.section { padding: 80px 0 100px; background: var(--bg-surface); border-bottom: 1px solid var(--line); }
+
+.grid { display: grid; grid-template-columns: 1fr 1.3fr; gap: 80px; align-items: start; }
+
+.left { animation: fadeSlideUp .6s cubic-bezier(.22,1,.36,1) forwards; }
+.right { animation: fadeSlideUp .6s cubic-bezier(.22,1,.36,1) .1s forwards; }
+
+.title { font-size: clamp(3rem, 6vw, 5rem); font-weight: 700; color: var(--fg); margin-top: 12px; letter-spacing: -.04em; line-height: 1; }
+
+.lead { font-size: 18px; font-weight: 600; color: var(--accent); margin-top: 12px; margin-bottom: 24px; line-height: 1.4; }
+
+.brandCard {
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: 12px;
+  padding: 18px 20px;
+  margin-top: 24px;
+}
+
+.brandSubtitle {
+  font-size: 14px;
+  color: var(--muted);
+  line-height: 1.5;
+  display: block;
+}
+
+.brandDivider {
+  height: 1px;
+  background: var(--line);
+  margin: 14px 0;
+}
+
+.brandRelationRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  padding: 4px 0;
+}
+
+.brandLabel {
+  font-size: 11px;
+  font-family: var(--font-geist-mono), monospace;
+  text-transform: uppercase;
+  letter-spacing: .06em;
+  color: var(--muted-light);
+  white-space: nowrap;
+}
+
+.brandName {
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: .05em;
+  color: var(--fg);
+  white-space: nowrap;
+}
+
+.founderName {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--fg);
+  white-space: nowrap;
+}
+
+.body { font-size: 17px; color: var(--muted); line-height: 1.65; margin-bottom: 14px; }
+
+.focusGrid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; margin-top: 28px; }
+
+.focusItem {
+  display: flex; align-items: center; gap: 12px; padding: 14px 18px;
+  background: var(--card-bg); border: 1px solid var(--card-border); border-radius: 12px;
+  transition: border-color .25s, transform .25s;
+}
+.focusItem:hover { border-color: var(--accent); transform: translateY(-1px); }
+
+.focusIcon { color: var(--accent); display: flex; flex-shrink: 0; }
+
+.focusLabel { font-size: 14px; font-weight: 600; color: var(--fg); }
+
+.techRow { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 24px; }
+.techTag {
+  font-size: 12px; font-family: var(--font-geist-mono), monospace; padding: 5px 12px;
+  border: 1px solid var(--line); border-radius: 999px; color: var(--muted); font-weight: 500;
+  transition: border-color .2s, color .2s;
+}
+.techTag:hover { border-color: var(--accent); color: var(--fg); }
+
+@keyframes fadeSlideUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+
+@media (max-width: 768px) {
+  .grid { grid-template-columns: 1fr; gap: 32px; }
+  .focusGrid { grid-template-columns: 1fr; }
+}

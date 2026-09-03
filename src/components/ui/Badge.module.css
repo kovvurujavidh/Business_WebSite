@@ -1,0 +1,66 @@
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 12px;
+  border-radius: var(--radius-full);
+  font-size: 12px;
+  font-weight: var(--font-weight-medium);
+  letter-spacing: .02em;
+}
+
+.dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+}
+
+.default {
+  background: var(--toggle-bg);
+  border: 1px solid var(--line);
+  color: var(--muted);
+}
+
+.default .dot {
+  background: var(--muted);
+}
+
+.primary {
+  background: rgba(201, 106, 58, .08);
+  border: 1px solid rgba(201, 106, 58, .2);
+  color: var(--accent);
+}
+
+.primary .dot {
+  background: var(--accent);
+}
+
+.cyan {
+  background: rgba(42, 122, 138, .08);
+  border: 1px solid rgba(42, 122, 138, .2);
+  color: var(--accent-cyan);
+}
+
+.cyan .dot {
+  background: var(--accent-cyan);
+}
+
+.emerald {
+  background: rgba(45, 122, 79, .08);
+  border: 1px solid rgba(45, 122, 79, .2);
+  color: var(--accent-emerald);
+}
+
+.emerald .dot {
+  background: var(--accent-emerald);
+}
+
+.amber {
+  background: rgba(184, 134, 11, .08);
+  border: 1px solid rgba(184, 134, 11, .2);
+  color: var(--accent-amber);
+}
+
+.amber .dot {
+  background: var(--accent-amber);
+}

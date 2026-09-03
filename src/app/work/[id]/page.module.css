@@ -1,0 +1,718 @@
+.pageWrapper {
+  padding-top: 110px;
+  padding-bottom: 120px;
+  min-height: 100vh;
+  position: relative;
+}
+
+/* ==========================================================================
+   1. TOP NAVIGATION / BACK BUTTON
+   ========================================================================== */
+.topNav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 48px;
+  animation: fadeIn 0.5s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+.backLink {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--muted);
+  transition: color 0.25s, transform 0.25s;
+  min-height: 40px;
+}
+
+.backLink svg {
+  transition: transform 0.25s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.backLink:hover {
+  color: var(--fg);
+}
+
+.backLink:hover svg {
+  transform: translateX(-4px);
+}
+
+.topIndex {
+  font-family: var(--font-geist-mono), monospace;
+  font-size: 12px;
+  letter-spacing: 0.1em;
+  color: var(--muted-light);
+}
+
+/* ==========================================================================
+   2. HERO SECTION
+   ========================================================================== */
+.hero {
+  margin-bottom: 56px;
+  animation: heroReveal 0.6s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+.heroMetaRow {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 24px;
+}
+
+.heroCategory {
+  font-family: var(--font-geist-mono), monospace;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+.heroMetaDot {
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: var(--muted-light);
+  opacity: 0.6;
+}
+
+.heroYear {
+  font-family: var(--font-geist-mono), monospace;
+  font-size: 12px;
+  letter-spacing: 0.1em;
+  color: var(--muted);
+}
+
+.heroTitle {
+  font-size: clamp(2.8rem, 6vw, 4.8rem);
+  font-weight: 700;
+  letter-spacing: -0.035em;
+  line-height: 1.05;
+  color: var(--fg);
+  margin-bottom: 24px;
+  max-width: 900px;
+}
+
+.heroTagline {
+  font-size: clamp(1.15rem, 2.2vw, 1.35rem);
+  color: var(--muted);
+  line-height: 1.6;
+  max-width: 740px;
+  margin-bottom: 36px;
+}
+
+.heroActions {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+
+.btnPrimaryLink {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  border-radius: 999px;
+  padding: 14px 28px;
+  font-size: 14px;
+  font-weight: 600;
+  background: var(--fg);
+  color: var(--bg);
+  border: 1.5px solid var(--fg);
+  transition: all 0.25s cubic-bezier(0.22, 1, 0.36, 1);
+  min-height: 48px;
+}
+
+.btnPrimaryLink:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-lg);
+}
+
+.btnPrimaryLink:active {
+  transform: translateY(0);
+}
+
+.btnPrimaryLink svg {
+  transition: transform 0.25s;
+}
+
+.btnPrimaryLink:hover svg {
+  transform: translate(2px, -2px);
+}
+
+.btnSecondaryLink {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  border-radius: 999px;
+  padding: 14px 28px;
+  font-size: 14px;
+  font-weight: 600;
+  background: transparent;
+  color: var(--fg);
+  border: 1.5px solid var(--line-strong);
+  transition: all 0.25s cubic-bezier(0.22, 1, 0.36, 1);
+  min-height: 48px;
+}
+
+.btnSecondaryLink:hover {
+  background: var(--toggle-bg);
+  border-color: var(--fg);
+  transform: translateY(-2px);
+}
+
+.btnSecondaryLink:active {
+  transform: translateY(0);
+}
+
+/* ==========================================================================
+   3. PROJECT VISUAL SHOWCASE
+   ========================================================================== */
+.visualContainer {
+  width: 100%;
+  margin-bottom: 72px;
+  animation: heroReveal 0.7s cubic-bezier(0.22, 1, 0.36, 1) 0.1s both;
+}
+
+.visualFrame {
+  position: relative;
+  width: 100%;
+  height: clamp(340px, 52vw, 640px);
+  border-radius: 24px;
+  overflow: hidden;
+  background: var(--bg-surface);
+  border: 1px solid var(--line);
+  box-shadow: var(--shadow-md);
+  transition: border-color 0.4s, box-shadow 0.4s;
+}
+
+.visualFrame:hover {
+  border-color: var(--line-strong);
+  box-shadow: var(--shadow-lg);
+}
+
+.visualImage {
+  object-fit: cover;
+  object-position: top center;
+  transition: transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.visualFrame:hover .visualImage {
+  transform: scale(1.02);
+}
+
+.visualPlaceholder {
+  position: relative;
+  width: 100%;
+  height: clamp(300px, 45vw, 500px);
+  border-radius: 24px;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px;
+}
+
+.placeholderInner {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+}
+
+.placeholderBadge {
+  font-family: var(--font-geist-mono), monospace;
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.8);
+  margin-bottom: 12px;
+  display: block;
+}
+
+.placeholderTitle {
+  font-size: clamp(1.8rem, 4vw, 2.8rem);
+  font-weight: 700;
+  color: var(--fg);
+  letter-spacing: -0.03em;
+}
+
+/* ==========================================================================
+   4. METADATA STRIP
+   ========================================================================== */
+.metaStrip {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 32px;
+  padding: 36px 0;
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  margin-bottom: 80px;
+  animation: fadeIn 0.6s cubic-bezier(0.22, 1, 0.36, 1) 0.15s both;
+}
+
+.metaItem {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.metaLabel {
+  font-family: var(--font-geist-mono), monospace;
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--accent);
+  font-weight: 600;
+}
+
+.metaValue {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--fg);
+  line-height: 1.4;
+}
+
+/* ==========================================================================
+   5. EDITORIAL CASE STUDY CONTENT
+   ========================================================================== */
+.caseContent {
+  display: flex;
+  flex-direction: column;
+}
+
+.editorialSection {
+  display: grid;
+  grid-template-columns: 280px 1fr;
+  gap: 64px;
+  padding: 56px 0;
+  border-top: 1px solid var(--line);
+  align-items: start;
+}
+
+.sectionHeaderCol {
+  position: sticky;
+  top: 100px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.sectionHeading {
+  font-size: clamp(1.5rem, 2.4vw, 2rem);
+  font-weight: 700;
+  color: var(--fg);
+  letter-spacing: -0.03em;
+  line-height: 1.2;
+}
+
+.sectionBodyCol {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  max-width: 720px;
+}
+
+.leadParagraph {
+  font-size: clamp(1.1rem, 1.8vw, 1.25rem);
+  color: var(--fg-soft);
+  line-height: 1.75;
+  font-weight: 400;
+}
+
+.bodyParagraph {
+  font-size: clamp(1rem, 1.5vw, 1.08rem);
+  color: var(--muted);
+  line-height: 1.75;
+}
+
+/* Features Grid */
+.featuresGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 16px;
+  width: 100%;
+}
+
+.featureCard {
+  padding: 24px;
+  background: var(--bg-surface);
+  border: 1px solid var(--card-border);
+  border-radius: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  transition: border-color 0.25s, transform 0.25s;
+}
+
+.featureCard:hover {
+  border-color: var(--line-strong);
+  transform: translateY(-2px);
+}
+
+.featureNum {
+  font-family: var(--font-geist-mono), monospace;
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--accent);
+  letter-spacing: 0.08em;
+}
+
+.featureTitle {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--fg);
+  line-height: 1.3;
+}
+
+.featureDesc {
+  font-size: 13px;
+  color: var(--muted);
+  line-height: 1.6;
+}
+
+/* Architecture List */
+.archList {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.archItem {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+  font-size: clamp(1rem, 1.5vw, 1.08rem);
+  color: var(--fg-soft);
+  line-height: 1.6;
+}
+
+.archBullet {
+  color: var(--accent);
+  font-weight: 600;
+  font-family: var(--font-geist-mono), monospace;
+  flex-shrink: 0;
+}
+
+/* Metrics Grid */
+.metricsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 16px;
+  margin-bottom: 12px;
+}
+
+.metricCard {
+  padding: 20px;
+  background: var(--bg-surface);
+  border: 1px solid var(--card-border);
+  border-radius: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.metricVal {
+  font-size: clamp(1.6rem, 3vw, 2.2rem);
+  font-weight: 700;
+  color: var(--fg);
+  letter-spacing: -0.03em;
+  line-height: 1.1;
+}
+
+.metricLbl {
+  font-size: 11px;
+  font-family: var(--font-geist-mono), monospace;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+/* Technologies Pill Cluster */
+.techCluster {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.techPill {
+  font-family: var(--font-geist-mono), monospace;
+  font-size: 13px;
+  font-weight: 500;
+  padding: 8px 18px;
+  border-radius: 999px;
+  background: var(--bg-surface);
+  border: 1px solid var(--line);
+  color: var(--fg-soft);
+  transition: border-color 0.25s, color 0.25s, transform 0.25s;
+}
+
+.techPill:hover {
+  border-color: var(--accent);
+  color: var(--fg);
+  transform: translateY(-1px);
+}
+
+/* ==========================================================================
+   6. NEXT PROJECT TRANSITION
+   ========================================================================== */
+.nextSection {
+  margin-top: 80px;
+  border-top: 1px solid var(--line);
+  padding-top: 64px;
+}
+
+.nextCard {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 40px 48px;
+  background: var(--bg-surface);
+  border: 1px solid var(--card-border);
+  border-radius: 24px;
+  text-decoration: none;
+  transition: all 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+  position: relative;
+  overflow: hidden;
+  gap: 32px;
+}
+
+.nextCard:hover {
+  border-color: var(--line-strong);
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-lg);
+}
+
+.nextInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  flex: 1;
+}
+
+.nextLabel {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-geist-mono), monospace;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+.nextLabel svg {
+  transition: transform 0.25s;
+}
+
+.nextCard:hover .nextLabel svg {
+  transform: translateX(3px);
+}
+
+.nextTitle {
+  font-size: clamp(1.8rem, 3.8vw, 2.8rem);
+  font-weight: 700;
+  color: var(--fg);
+  letter-spacing: -0.03em;
+  line-height: 1.15;
+  transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.nextCard:hover .nextTitle {
+  transform: translateX(6px);
+}
+
+.nextTagline {
+  font-size: 14px;
+  color: var(--muted);
+  line-height: 1.5;
+  max-width: 480px;
+}
+
+.nextVisualPreview {
+  width: 180px;
+  height: 110px;
+  position: relative;
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  background: var(--bg-deep);
+  flex-shrink: 0;
+  transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.nextCard:hover .nextVisualPreview {
+  transform: scale(1.04);
+}
+
+.nextThumbnail {
+  object-fit: cover;
+}
+
+.nextArrowWrap {
+  flex-shrink: 0;
+}
+
+.nextArrowCircle {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  border: 1.5px solid var(--line-strong);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--fg);
+  transition: all 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.nextCard:hover .nextArrowCircle {
+  background: var(--fg);
+  color: var(--bg);
+  border-color: var(--fg);
+  transform: translateX(4px);
+}
+
+/* ==========================================================================
+   ANIMATIONS
+   ========================================================================== */
+@keyframes heroReveal {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* ==========================================================================
+   RESPONSIVE DESIGN
+   ========================================================================== */
+@media (max-width: 960px) {
+  .editorialSection {
+    grid-template-columns: 1fr;
+    gap: 24px;
+    padding: 40px 0;
+  }
+
+  .sectionHeaderCol {
+    position: static;
+  }
+
+  .metaStrip {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+  }
+
+  .nextCard {
+    padding: 32px;
+  }
+
+  .nextVisualPreview {
+    display: none;
+  }
+}
+
+@media (max-width: 640px) {
+  .pageWrapper {
+    padding-top: 88px;
+    padding-bottom: 72px;
+  }
+
+  .topNav {
+    margin-bottom: 32px;
+  }
+
+  .hero {
+    margin-bottom: 40px;
+  }
+
+  .heroTitle {
+    font-size: 2.2rem;
+    margin-bottom: 16px;
+  }
+
+  .heroTagline {
+    font-size: 1rem;
+    margin-bottom: 28px;
+  }
+
+  .heroActions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .btnPrimaryLink,
+  .btnSecondaryLink {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .visualContainer {
+    margin-bottom: 48px;
+  }
+
+  .visualFrame {
+    border-radius: 16px;
+    height: 240px;
+  }
+
+  .metaStrip {
+    grid-template-columns: 1fr;
+    gap: 18px;
+    padding: 24px 0;
+    margin-bottom: 48px;
+  }
+
+  .nextSection {
+    margin-top: 56px;
+    padding-top: 40px;
+  }
+
+  .nextCard {
+    padding: 24px 20px;
+    border-radius: 18px;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 20px;
+  }
+
+  .nextArrowWrap {
+    align-self: flex-end;
+  }
+
+  .featuresGrid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero,
+  .visualContainer,
+  .metaStrip,
+  .topNav,
+  .visualImage,
+  .btnPrimaryLink,
+  .btnSecondaryLink,
+  .nextCard,
+  .nextTitle,
+  .nextArrowCircle {
+    animation: none !important;
+    transition: none !important;
+    transform: none !important;
+  }
+}

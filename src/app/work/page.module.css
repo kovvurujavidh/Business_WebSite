@@ -1,0 +1,65 @@
+.pageWrapper { padding-top: 100px; padding-bottom: 80px; }
+
+.header { margin-bottom: 48px; }
+.badgeWrapper { margin-bottom: 12px; }
+.title {
+  font-size: clamp(2.5rem, 5vw, 4rem); font-weight: 700;
+  color: var(--fg); letter-spacing: -.03em; margin-bottom: 12px;
+}
+.subtitle {
+  font-size: 16px; color: var(--muted); max-width: 500px; line-height: 1.55;
+}
+
+.projectsGrid {
+  display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px;
+}
+
+.projectCard {
+  background: var(--card-bg); border: 1px solid var(--card-border);
+  border-radius: 16px; padding: 28px;
+  transition: transform .3s, box-shadow .3s, border-color .3s;
+}
+.projectCard:hover {
+  transform: translateY(-4px); box-shadow: var(--shadow-md);
+}
+
+.cardHeader { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 16px; }
+.badgeRow { display: flex; gap: 8px; }
+.yearText { font-size: 11px; font-family: var(--font-geist-mono), monospace; color: var(--muted); }
+.indexNum { font-size: 12px; font-family: var(--font-geist-mono), monospace; color: var(--muted-light); }
+
+.cardBody { margin-bottom: 20px; }
+.projectTitle { font-size: 1.35rem; font-weight: 700; margin-bottom: 8px; }
+.titleLink { transition: color .2s; }
+.titleLink:hover { color: var(--accent); }
+.projectDesc { font-size: 14px; color: var(--muted); line-height: 1.55; }
+
+.metricsRow { display: flex; gap: 24px; margin-bottom: 16px; }
+.metricItem { display: flex; flex-direction: column; gap: 2px; }
+.metricVal { font-size: 18px; font-weight: 700; color: var(--fg); }
+.metricLbl { font-size: 11px; color: var(--muted); text-transform: uppercase; letter-spacing: .06em; }
+
+.techList { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 20px; }
+.techPill {
+  font-size: 11px; font-family: var(--font-geist-mono), monospace; padding: 4px 10px;
+  border: 1px solid var(--line); border-radius: 999px; color: var(--muted);
+}
+
+.cardFooter { border-top: 1px solid var(--line); padding-top: 16px; }
+.viewLink {
+  display: flex; justify-content: space-between; align-items: center;
+  font-size: 13px; font-weight: 600; color: var(--accent);
+  transition: gap .3s var(--ease);
+}
+.viewLink:hover { gap: 8px; }
+
+.backHomeWrapper { margin-top: 40px; text-align: center; }
+.backHomeBtn {
+  font-size: 14px; font-weight: 500; color: var(--muted);
+  transition: color .2s;
+}
+.backHomeBtn:hover { color: var(--fg); }
+
+@media (max-width: 768px) {
+  .projectsGrid { grid-template-columns: 1fr; }
+}

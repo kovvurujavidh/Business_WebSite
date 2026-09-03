@@ -1,0 +1,64 @@
+.section { padding: 80px 0; background: var(--bg); }
+
+.header { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 48px; gap: 24px; }
+.title { font-size: clamp(2.4rem, 4.5vw, 3.5rem); font-weight: 700; margin-top: 12px; color: var(--fg); letter-spacing: -.03em; }
+.subtitle { color: var(--muted); font-size: 16px; max-width: 320px; text-align: right; line-height: 1.55; }
+
+.grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+
+.card {
+  background: var(--card-bg); border: 1px solid var(--card-border); border-radius: 16px;
+  overflow: hidden; transition: transform .35s cubic-bezier(.22,1,.36,1), box-shadow .35s, border-color .35s;
+  display: flex; flex-direction: column;
+  animation: fadeSlideUp .5s cubic-bezier(.22,1,.36,1) both;
+}
+.card:hover { transform: translateY(-6px); box-shadow: var(--shadow-lg); border-color: var(--line-strong); }
+
+.cardVisual {
+  height: 180px; position: relative; display: flex; flex-direction: column;
+  justify-content: flex-end; padding: 20px; overflow: hidden;
+  transition: transform .5s cubic-bezier(.22,1,.36,1);
+}
+.card:hover .cardVisual { transform: scale(1.02); }
+.cardVisual::after { content: ''; position: absolute; inset: 0; background: linear-gradient(to top, rgba(0,0,0,.45) 0%, transparent 60%); z-index: 1; }
+.cardImage { object-fit: cover; }
+.visualNum { position: absolute; top: 16px; right: 20px; font-family: var(--font-geist-mono), monospace; font-size: 48px; font-weight: 700; color: rgba(255,255,255,.15); line-height: 1; z-index: 2; }
+.visualCategory { position: relative; z-index: 2; font-size: 11px; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; color: rgba(255,255,255,.8); }
+
+.cardBody { padding: 24px; flex: 1; display: flex; flex-direction: column; }
+.cardMeta { display: flex; gap: 8px; margin-bottom: 12px; }
+.yearTag, .roleTag { font-size: 11px; font-family: var(--font-geist-mono), monospace; letter-spacing: .06em; color: var(--muted); text-transform: uppercase; }
+.cardTitle { font-size: 1.3rem; font-weight: 700; margin-bottom: 8px; line-height: 1.2; }
+.cardTitle a { transition: color .25s; }
+.cardTitle a:hover { color: var(--accent); }
+.cardDesc { font-size: 14px; color: var(--muted); line-height: 1.55; margin-bottom: 16px; }
+.cardTech { display: flex; flex-wrap: wrap; gap: 6px; margin-top: auto; margin-bottom: 20px; }
+.techPill { font-size: 11px; font-family: var(--font-geist-mono), monospace; padding: 4px 10px; border: 1px solid var(--line); border-radius: 999px; color: var(--muted); }
+.cardFooter { border-top: 1px solid var(--line); padding-top: 16px; display: flex; justify-content: space-between; align-items: center; }
+.caseLink { display: flex; align-items: center; gap: 6px; font-size: 13px; font-weight: 600; color: var(--accent); transition: gap .25s; min-height: 36px; }
+.caseLink:hover { gap: 10px; }
+.caseLink svg { transition: transform .25s; }
+.caseLink:hover svg { transform: translateX(3px); }
+.liveLink { display: flex; align-items: center; gap: 4px; font-size: 12px; color: var(--muted); font-weight: 500; transition: color .2s; min-height: 36px; }
+.liveLink:hover { color: var(--fg); }
+.liveLink svg { transition: transform .2s; }
+.liveLink:hover svg { transform: translate(1px, -1px); }
+
+.viewAll { margin-top: 36px; text-align: center; }
+.viewAllBtn {
+  display: inline-flex; align-items: center; gap: 8px; font-size: 14px; font-weight: 600;
+  color: var(--fg); padding: 12px 28px; border: 1.5px solid var(--fg); border-radius: 999px;
+  transition: all .25s; min-height: 48px;
+}
+.viewAllBtn:hover { background: var(--fg); color: var(--bg); transform: translateY(-2px); }
+.viewAllBtn:active { transform: translateY(0); }
+.viewAllBtn svg { transition: transform .25s; }
+.viewAllBtn:hover svg { transform: translateX(3px); }
+
+@keyframes fadeSlideUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+
+@media (max-width: 900px) {
+  .grid { grid-template-columns: 1fr; max-width: 500px; margin: 0 auto; }
+  .header { flex-direction: column; align-items: flex-start; }
+  .subtitle { text-align: left; max-width: none; }
+}

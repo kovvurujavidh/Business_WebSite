@@ -1,0 +1,15 @@
+.wrap {
+  overflow: hidden; white-space: nowrap; width: 100%;
+  border-top: 1px solid var(--line); border-bottom: 1px solid var(--line);
+  padding: 16px 0; background: var(--bg-surface);
+}
+.track { display: inline-flex; gap: 48px; animation: marquee 30s linear infinite; }
+.track:hover { animation-play-state: paused; }
+.item {
+  font-family: Georgia, serif; font-size: clamp(.95rem, 1.8vw, 1.15rem);
+  color: var(--muted-light); letter-spacing: .02em; white-space: nowrap;
+  display: inline-flex; align-items: center; gap: 16px;
+}
+.sep { width: 5px; height: 5px; border-radius: 50%; background: var(--accent); opacity: .35; }
+
+@keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }

@@ -1,0 +1,46 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model Enquiry {
+  id        String   @id @default(cuid())
+  name      String
+  email     String
+  phone     String?
+  subject   String
+  message   String
+  projectType String?
+  budget    String?
+  timeline  String?
+  status    String   @default("pending") // pending, read, replied
+  telegramNotified Boolean @default(false)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([status])
+  @@index([createdAt])
+}
+
+model Review {
+  id        String   @id @default(cuid())
+  name      String
+  email     String?
+  rating    Int      // 1-5 stars
+  title     String
+  content   String
+  projectRef String? // optional reference to a project
+  approved  Boolean  @default(false) // moderation flag
+  featured  Boolean  @default(false) // for showcasing
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([approved])
+  @@index([featured])
+  @@index([rating])
+  @@index([createdAt])
+}
