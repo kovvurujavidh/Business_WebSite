@@ -13,6 +13,9 @@ export const metadata: Metadata = {
   description: "I build professional websites and digital solutions for hotels, restaurants, function halls, and local businesses.",
   keywords: ["LocalBizz", "web developer", "website builder", "business websites", "landing pages", "digital solutions", "local business", "Javidh"],
   authors: [{ name: "Javidh" }],
+  verification: {
+  google: "l5IkZcZcaMM6_u-uIK41dWlOTRkz9pQVwUZ6om3Qdfw",
+},
   openGraph: {
     type: "website",
     locale: "en_US",
