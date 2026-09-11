@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" fill="none">
+  <rect width="1200" height="630" fill="#0c0b09"/>
+  <rect x="60" y="60" width="1080" height="510" rx="24" fill="#141310" stroke="#c87941" stroke-width="2" opacity=".5"/>
+  <rect x="80" y="80" width="80" height="80" rx="16" fill="#c87941"/>
+  <text x="120" y="135" text-anchor="middle" font-family="system-ui, sans-serif" font-weight="800" font-size="42" fill="#fff">L</text>
+  <text x="185" y="132" font-family="system-ui, sans-serif" font-weight="700" font-size="32" fill="#ebe8e1" letter-spacing="2">LOCALBIZZ</text>
+  <text x="80" y="250" font-family="system-ui, sans-serif" font-weight="700" font-size="52" fill="#ebe8e1">Digital Solutions for</text>
+  <text x="80" y="320" font-family="system-ui, sans-serif" font-weight="700" font-size="52" fill="#c87941">Local Businesses</text>
+  <text x="80" y="400" font-family="system-ui, sans-serif" font-weight="400" font-size="22" fill="#8a8579">Professional websites for hotels, restaurants,</text>
+  <text x="80" y="435" font-family="system-ui, sans-serif" font-weight="400" font-size="22" fill="#8a8579">function halls, and local businesses.</text>
+  <text x="80" y="510" font-family="system-ui, sans-serif" font-weight="600" font-size="16" fill="#c87941">localbizz.vercel.app</text>
+</svg>

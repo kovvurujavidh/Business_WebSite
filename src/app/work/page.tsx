@@ -7,8 +7,13 @@ import { Badge } from "@/components/ui/Badge";
 import styles from "./page.module.css";
 
 export const metadata: Metadata = {
-  title: "Engineering Archives & All Projects",
-  description: "Comprehensive portfolio of software architectures, systems engineering, and modern digital applications.",
+  title: "All Projects — LocalBizz Portfolio",
+  description: "Browse all projects built by LocalBizz — websites, landing pages, dashboards, and digital tools for real businesses.",
+  openGraph: {
+    title: "All Projects — LocalBizz",
+    description: "Browse all projects built by LocalBizz — websites, landing pages, dashboards, and digital tools.",
+    url: "https://localbizz.vercel.app/work",
+  },
 };
 
 export default function AllProjectsPage() {

@@ -22,14 +22,34 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const project = getProjectById(id);
 
   if (!project) {
-    return {
-      title: "Project Not Found",
-    };
+    return { title: "Project Not Found" };
   }
 
   return {
-    title: `${project.title} — LocalBizz`,
+    title: `${project.title}`,
     description: project.tagline || project.description,
+    keywords: [project.category, project.title, "LocalBizz", "web developer", ...project.techStack],
+    openGraph: {
+      title: `${project.title} — LocalBizz`,
+      description: project.tagline || project.description,
+      url: `https://localbizz.vercel.app/work/${project.id}`,
+      images: [
+        {
+          url: `https://localbizz.vercel.app/og.svg`,
+          width: 1200,
+          height: 630,
+          alt: project.title,
+        },
+      ],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: `${project.title} — LocalBizz`,
+      description: project.tagline || project.description,
+    },
+    alternates: {
+      canonical: `https://localbizz.vercel.app/work/${project.id}`,
+    },
   };
 }
 
