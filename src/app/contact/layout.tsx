@@ -6,7 +6,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Contact — LocalBizz",
     description: "Get in touch with LocalBizz. Send an enquiry about your website project.",
-    url: "https://localbizz.vercel.app/contact",
+    url: "https://localbizz.dpdns.org/contact",
   },
 };
 

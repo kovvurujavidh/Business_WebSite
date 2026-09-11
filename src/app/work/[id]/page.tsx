@@ -32,7 +32,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     openGraph: {
       title: `${project.title} — LocalBizz`,
       description: project.tagline || project.description,
-      url: `https://localbizz.vercel.app/work/${project.id}`,
+      url: `https://localbizz.dpdns.org/work/${project.id}`,
       images: [
         {
           url: `https://localbizz.vercel.app/og.svg`,
@@ -48,7 +48,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
       description: project.tagline || project.description,
     },
     alternates: {
-      canonical: `https://localbizz.vercel.app/work/${project.id}`,
+      canonical: `https://localbizz.dpdns.org/work/${project.id}`,
     },
   };
 }

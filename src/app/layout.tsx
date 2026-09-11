@@ -10,7 +10,7 @@ import { GoogleAnalytics } from "@/components/analytics/GoogleAnalytics";
 const geistSans = Geist({ variable: "--font-geist-sans", subsets: ["latin"] });
 const geistMono = Geist_Mono({ variable: "--font-geist-mono", subsets: ["latin"] });
 
-const SITE_URL = "https://localbizz.vercel.app";
+const SITE_URL = "https://localbizz.dpdns.org";
 const SITE_NAME = "LocalBizz";
 const SITE_DESC = "LocalBizz builds professional websites and digital solutions for hotels, restaurants, function halls, and local businesses. Founded by Javidh — clean design, fast performance, real results.";
 

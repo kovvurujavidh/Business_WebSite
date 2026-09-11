@@ -1,7 +1,7 @@
 import type { MetadataRoute } from "next";
 import { getAllProjects } from "@/data/projects";
 
-const SITE_URL = "https://localbizz.vercel.app";
+const SITE_URL = "https://localbizz.dpdns.org";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const projects = getAllProjects();

@@ -12,7 +12,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "All Projects — LocalBizz",
     description: "Browse all projects built by LocalBizz — websites, landing pages, dashboards, and digital tools.",
-    url: "https://localbizz.vercel.app/work",
+    url: "https://localbizz.dpdns.org/work",
   },
 };
 

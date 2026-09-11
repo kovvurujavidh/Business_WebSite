@@ -9,6 +9,6 @@ export default function robots(): MetadataRoute.Robots {
         disallow: ["/api/", "/admin/"],
       },
     ],
-    sitemap: "https://localbizz.vercel.app/sitemap.xml",
+    sitemap: "https://localbizz.dpdns.org/sitemap.xml",
   };
 }
