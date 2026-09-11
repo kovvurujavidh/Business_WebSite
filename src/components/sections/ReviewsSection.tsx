@@ -1,6 +1,10 @@
 "use client";
 
 import React, { useState, useEffect, useCallback, useRef } from "react";
+import { Reveal } from "@/components/ui/Reveal";
+import { TextReveal } from "@/components/ui/TextReveal";
+import { TiltCard } from "@/components/ui/TiltCard";
+import { Magnetic } from "@/components/ui/Magnetic";
 import styles from "./ReviewsSection.module.css";
 
 interface Review {
@@ -86,11 +90,13 @@ export function ReviewsSection() {
   return (
     <section id="reviews" className={styles.section}>
       <div className="container">
-        <div className={styles.header}>
-          <span className="section-label">Reviews</span>
-          <h2 className={styles.title}>What Clients Say</h2>
-          <p className={styles.subtitle}>Honest feedback from people I&apos;ve worked with.</p>
-        </div>
+        <Reveal>
+          <div className={styles.header}>
+            <span className="section-label">Reviews</span>
+            <TextReveal text="What Clients Say" tag="h2" className={styles.title} />
+            <p className={styles.subtitle}>Honest feedback from people I&apos;ve worked with.</p>
+          </div>
+        </Reveal>
 
         <div className={styles.grid}>
           {loading ? (
@@ -103,77 +109,86 @@ export function ReviewsSection() {
               <p className={styles.emptyText}>Be the first to share your experience.</p>
             </div>
           ) : (
-            reviews.map((review) => (
-              <div key={review.id} className={styles.card}>
-                <div className={styles.stars}>
-                  {Array.from({ length: 5 }).map((_, i) => (
-                    <span key={i} className={i < review.rating ? styles.starFilled : styles.starEmpty}>&#9733;</span>
-                  ))}
-                </div>
-                <h4 className={styles.cardTitle}>{review.title}</h4>
-                <p className={styles.cardContent}>&ldquo;{review.content}&rdquo;</p>
-                <div className={styles.reviewer}>
-                  <div className={styles.avatar}>{review.name.charAt(0).toUpperCase()}</div>
-                  <div>
-                    <strong className={styles.name}>{review.name}</strong>
-                    <time className={styles.date}>{new Date(review.createdAt).toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" })}</time>
+            reviews.map((review, i) => (
+              <Reveal key={review.id} delay={i * 0.1}>
+                <TiltCard maxTilt={4}>
+                  <div className={styles.card}>
+                    <div className={styles.stars}>
+                      {Array.from({ length: 5 }).map((_, i) => (
+                        <span key={i} className={i < review.rating ? styles.starFilled : styles.starEmpty}>&#9733;</span>
+                      ))}
+                    </div>
+                    <h4 className={styles.cardTitle}>{review.title}</h4>
+                    <p className={styles.cardContent}>&ldquo;{review.content}&rdquo;</p>
+                    <div className={styles.reviewer}>
+                      <div className={styles.avatar}>{review.name.charAt(0).toUpperCase()}</div>
+                      <div>
+                        <strong className={styles.name}>{review.name}</strong>
+                        <time className={styles.date}>{new Date(review.createdAt).toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" })}</time>
+                      </div>
+                    </div>
                   </div>
-                </div>
-              </div>
+                </TiltCard>
+              </Reveal>
             ))
           )}
         </div>
 
-        <div className={styles.formCard} id="write-review">
-          <h3 className={styles.formTitle}>Write a Review</h3>
-          <p className={styles.formSubtitle}>Share your experience working with me.</p>
+        <Reveal delay={0.2}>
+          <div className={styles.formCard} id="write-review">
+            <h3 className={styles.formTitle}>Write a Review</h3>
+            <p className={styles.formSubtitle}>Share your experience working with me.</p>
 
-          {status === "success" && (
-            <div className={styles.successMsg}>
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
-              Thanks! Your review is now visible.
-            </div>
-          )}
-          {status === "error" && <div className={styles.errorMsg}>{errorMessage}</div>}
-
-          <form onSubmit={handleSubmit} className={styles.form}>
-            <div className={styles.formRow}>
-              <div className={styles.field}>
-                <label htmlFor="rw-name">Name</label>
-                <input type="text" id="rw-name" name="name" required value={formData.name} onChange={handleChange} placeholder="Your name" />
+            {status === "success" && (
+              <div className={styles.successMsg}>
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+                Thanks! Your review is now visible.
               </div>
-              <div className={styles.field}>
-                <label htmlFor="rw-rating">Rating</label>
-                <div className={styles.starPicker}>
-                  {[1, 2, 3, 4, 5].map((star) => (
-                    <button
-                      key={star}
-                      type="button"
-                      className={`${styles.starBtn} ${star <= displayRating ? styles.starBtnActive : ""}`}
-                      onClick={() => setFormData((prev) => ({ ...prev, rating: String(star) }))}
-                      onMouseEnter={() => setHoverRating(star)}
-                      onMouseLeave={() => setHoverRating(0)}
-                      aria-label={`${star} star${star > 1 ? "s" : ""}`}
-                    >
-                      &#9733;
-                    </button>
-                  ))}
+            )}
+            {status === "error" && <div className={styles.errorMsg}>{errorMessage}</div>}
+
+            <form onSubmit={handleSubmit} className={styles.form}>
+              <div className={styles.formRow}>
+                <div className={styles.field}>
+                  <label htmlFor="rw-name">Name</label>
+                  <input type="text" id="rw-name" name="name" required value={formData.name} onChange={handleChange} placeholder="Your name" />
+                </div>
+                <div className={styles.field}>
+                  <label htmlFor="rw-rating">Rating</label>
+                  <div className={styles.starPicker}>
+                    {[1, 2, 3, 4, 5].map((star) => (
+                      <Magnetic key={star} strength={0.3}>
+                        <button
+                          type="button"
+                          className={`${styles.starBtn} ${star <= displayRating ? styles.starBtnActive : ""}`}
+                          onClick={() => setFormData((prev) => ({ ...prev, rating: String(star) }))}
+                          onMouseEnter={() => setHoverRating(star)}
+                          onMouseLeave={() => setHoverRating(0)}
+                          aria-label={`${star} star${star > 1 ? "s" : ""}`}
+                        >
+                          &#9733;
+                        </button>
+                      </Magnetic>
+                    ))}
+                  </div>
                 </div>
               </div>
-            </div>
-            <div className={styles.field}>
-              <label htmlFor="rw-title">Review Title</label>
-              <input type="text" id="rw-title" name="title" required value={formData.title} onChange={handleChange} placeholder="Great work!" />
-            </div>
-            <div className={styles.field}>
-              <label htmlFor="rw-content">Your Review</label>
-              <textarea id="rw-content" name="content" required rows={4} value={formData.content} onChange={handleChange} placeholder="Share your experience..." />
-            </div>
-            <button type="submit" disabled={isSubmitting} className="btn-accent">
-              {isSubmitting ? "Submitting..." : "Submit Review"}
-            </button>
-          </form>
-        </div>
+              <div className={styles.field}>
+                <label htmlFor="rw-title">Review Title</label>
+                <input type="text" id="rw-title" name="title" required value={formData.title} onChange={handleChange} placeholder="Great work!" />
+              </div>
+              <div className={styles.field}>
+                <label htmlFor="rw-content">Your Review</label>
+                <textarea id="rw-content" name="content" required rows={4} value={formData.content} onChange={handleChange} placeholder="Share your experience..." />
+              </div>
+              <Magnetic strength={0.1}>
+                <button type="submit" disabled={isSubmitting} className="btn-accent">
+                  {isSubmitting ? "Submitting..." : "Submit Review"}
+                </button>
+              </Magnetic>
+            </form>
+          </div>
+        </Reveal>
       </div>
     </section>
   );

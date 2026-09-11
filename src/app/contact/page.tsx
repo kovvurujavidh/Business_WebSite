@@ -1,12 +1,10 @@
 "use client";
 
-import React, { useState, useEffect, Suspense } from "react";
+import React, { useState, Suspense } from "react";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { getPlanById } from "@/data/plans";
 import styles from "./page.module.css";
-
-const PLAN_LABELS: Record<string, string> = { basic: "Basic", medium: "Medium", high: "High" };
 
 function ContactInner() {
   const searchParams = useSearchParams();
@@ -21,12 +19,6 @@ function ContactInner() {
     plan: plan?.name || "",
     message: "",
   });
-
-  useEffect(() => {
-    if (plan) {
-      setFormData((prev) => ({ ...prev, plan: plan.name }));
-    }
-  }, [plan]);
 
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [status, setStatus] = useState<"idle" | "success" | "error">("idle");

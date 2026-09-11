@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { useTheme } from "./ThemeProvider";
 import styles from "./Header.module.css";
 
@@ -29,7 +30,7 @@ export function Header() {
       <header className={`${styles.header} ${scrolled ? styles.scrolled : ""}`}>
         <div className={styles.inner}>
           <Link href="/" className={styles.brand} onClick={close}>
-            <span className={styles.mark} />
+            <Image src="/logo.svg" alt="LocalBizz" width={28} height={28} className={styles.logo} priority />
             <span className={styles.brandText}>LOCALBIZZ</span>
           </Link>
 

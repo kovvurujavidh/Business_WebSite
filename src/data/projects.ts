@@ -55,7 +55,7 @@ export const PROJECTS: Project[] = [
     featured: true,
     accentColor: "linear-gradient(135deg, #c9784a 0%, #7d3e32 100%)",
     image: "/projects/Hotel .png",
-    liveUrl: "https://varasiddi-function-hall.netlify.app/",
+    liveUrl: "https://varasiddi.netlify.app/",
   },
   {
     id: "hr-analytics-excel-dashboard",

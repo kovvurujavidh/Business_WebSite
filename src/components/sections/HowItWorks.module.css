@@ -1,31 +1,75 @@
-.section { padding: 80px 0; background: var(--bg); }
-.header { margin-bottom: 56px; }
-.title { font-size: clamp(2.2rem, 4.5vw, 3.5rem); font-weight: 700; margin-top: 12px; color: var(--fg); letter-spacing: -.03em; }
+.section { padding: 72px 0; }
 
-.grid { display: grid; grid-template-columns: 4px 1fr; gap: 0 40px; max-width: 700px; }
-.progressCol { position: relative; }
-.progressTrack { position: absolute; top: 0; bottom: 0; width: 4px; background: var(--line); border-radius: 2px; }
-.progressFill { position: absolute; top: 0; width: 100%; background: var(--accent); border-radius: 2px; transition: height .6s cubic-bezier(.22,1,.36,1); }
+.header { margin-bottom: 32px; }
+.title { font-size: clamp(2.2rem, 4vw, 3rem); font-weight: 700; margin-top: 10px; color: var(--fg); letter-spacing: -.03em; }
 
-.stepsCol { display: flex; flex-direction: column; gap: 40px; }
-.step { display: flex; gap: 20px; opacity: .35; transition: opacity .5s; }
-.step.active { opacity: 1; }
-
-.stepIndicator {
-  width: 32px; height: 32px; border-radius: 50%; border: 2px solid var(--line);
-  display: flex; align-items: center; justify-content: center; flex-shrink: 0;
-  transition: all .4s; background: var(--bg);
+.statsRow {
+  display: flex; gap: 32px; margin-bottom: 48px;
+  padding: 20px 24px; background: var(--card-bg); border: 1px solid var(--card-border); border-radius: 12px;
 }
-.step.active .stepIndicator { border-color: var(--accent); background: var(--accent); }
-.stepNum { font-family: var(--font-geist-mono), monospace; font-size: 11px; font-weight: 600; color: var(--muted); transition: color .4s; }
-.step.active .stepNum { color: #fff; }
+.stat { display: flex; flex-direction: column; gap: 2px; }
+.statValue { font-size: 15px; font-weight: 700; color: var(--accent); }
+.statLabel { font-size: 12px; color: var(--muted); }
 
-.stepTitle { font-size: 1.2rem; font-weight: 700; color: var(--fg); margin-bottom: 4px; }
-.stepDesc { font-size: 15px; color: var(--muted); line-height: 1.55; }
+.stepsContainer {
+  display: grid; grid-template-columns: 40px 1fr; gap: 0 28px;
+  max-width: 680px;
+}
 
-@media (max-width: 768px) {
-  .grid { grid-template-columns: 1fr; gap: 0; }
-  .progressCol { display: none; }
-  .stepsCol { gap: 28px; }
-  .step { opacity: 1; }
+.lineTrack {
+  position: relative; width: 3px; background: var(--line); border-radius: 2px;
+}
+.lineFill {
+  position: absolute; top: 0; left: 0; width: 100%; border-radius: 2px;
+  background: linear-gradient(180deg, var(--accent), var(--accent-light));
+  transition: height .3s cubic-bezier(.22,1,.36,1);
+  box-shadow: 0 0 10px rgba(200,121,65,.25);
+}
+
+.steps {
+  display: flex; flex-direction: column; gap: 0;
+}
+
+.step {
+  display: grid; grid-template-columns: 36px 1fr; gap: 16px; align-items: start;
+  padding: 20px 0; position: relative;
+  opacity: .35; transition: opacity .6s cubic-bezier(.22,1,.36,1);
+}
+.stepActive { opacity: 1; }
+.stepDone { opacity: .65; }
+
+.stepDot {
+  width: 36px; height: 36px; border-radius: 50%; display: flex; align-items: center; justify-content: center;
+  background: var(--bg); border: 2px solid var(--line); position: relative; z-index: 2;
+  transition: all .55s cubic-bezier(.22,1,.36,1);
+}
+.stepActive .stepDot {
+  border-color: var(--accent); background: var(--accent);
+  box-shadow: 0 0 0 5px rgba(200,121,65,.12);
+}
+.stepDone .stepDot {
+  border-color: var(--accent-emerald); background: var(--accent-emerald);
+}
+
+.stepDotInner {
+  display: flex; align-items: center; justify-content: center;
+  color: var(--muted); transition: color .45s cubic-bezier(.22,1,.36,1);
+}
+.stepActive .stepDotInner { color: #fff; }
+.stepDone .stepDotInner { color: #fff; }
+
+.stepNum { font-size: 11px; font-weight: 700; letter-spacing: .04em; }
+.stepActive .stepNum { color: #fff; }
+
+.stepContent { padding-top: 6px; }
+.stepTitle { font-size: 1.1rem; font-weight: 600; color: var(--fg); margin-bottom: 4px; transition: color .4s cubic-bezier(.22,1,.36,1); }
+.stepActive .stepTitle { color: var(--accent); }
+.stepDesc { font-size: 14px; color: var(--muted); line-height: 1.55; }
+
+@media (max-width: 640px) {
+  .statsRow { flex-direction: column; gap: 16px; padding: 16px 20px; }
+  .stepsContainer { grid-template-columns: 32px 1fr; gap: 0 20px; }
+  .step { grid-template-columns: 32px 1fr; gap: 12px; padding: 16px 0; }
+  .stepDot { width: 32px; height: 32px; }
+  .stepTitle { font-size: 1rem; }
 }
