@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { prisma } from '@/lib/prisma';
+import { store } from '@/lib/store';
 import { sendTelegramNotification } from '@/lib/telegram';
 
 function validateEmail(email: string): boolean {
@@ -13,20 +13,7 @@ function sanitizeString(value: unknown, maxLength = 500): string | null {
   return trimmed.slice(0, maxLength);
 }
 
-function validateInput(body: Record<string, unknown>): {
-  valid: boolean;
-  errors: string[];
-  data: {
-    name: string;
-    email: string;
-    phone: string | null;
-    subject: string;
-    message: string;
-    projectType: string | null;
-    budget: string | null;
-    timeline: string | null;
-  };
-} {
+function validateInput(body: Record<string, unknown>) {
   const errors: string[] = [];
 
   const name = sanitizeString(body.name, 100);
@@ -37,6 +24,7 @@ function validateInput(body: Record<string, unknown>): {
   const projectType = sanitizeString(body.projectType, 100);
   const budget = sanitizeString(body.budget, 50);
   const timeline = sanitizeString(body.timeline, 50);
+  const plan = sanitizeString(body.plan, 50);
 
   if (!name) errors.push('Name is required.');
   if (!email) {
@@ -50,7 +38,7 @@ function validateInput(body: Record<string, unknown>): {
   return {
     valid: errors.length === 0,
     errors,
-    data: { name: name || '', email: email || '', phone, subject: subject || '', message: message || '', projectType, budget, timeline },
+    data: { name: name || '', email: email || '', phone, subject: subject || '', message: message || '', projectType, budget, timeline, plan },
   };
 }
 
@@ -74,17 +62,16 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    const enquiry = await prisma.enquiry.create({
-      data: {
-        name: data.name,
-        email: data.email,
-        phone: data.phone || null,
-        subject: data.subject,
-        message: data.message,
-        projectType: data.projectType || null,
-        budget: data.budget || null,
-        timeline: data.timeline || null,
-      },
+    const enquiry = store.enquiries.create({
+      name: data.name,
+      email: data.email,
+      phone: data.phone || null,
+      subject: data.subject,
+      message: data.message,
+      projectType: data.projectType || null,
+      budget: data.budget || null,
+      timeline: data.timeline || null,
+      plan: data.plan || null,
     });
 
     let telegramSent = false;
@@ -104,10 +91,7 @@ export async function POST(request: NextRequest) {
     }
 
     if (telegramSent) {
-      await prisma.enquiry.update({
-        where: { id: enquiry.id },
-        data: { telegramNotified: true },
-      });
+      store.enquiries.update(enquiry.id, { telegramNotified: true });
     }
 
     return NextResponse.json(

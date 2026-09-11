@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { prisma } from '@/lib/prisma';
+import { store } from '@/lib/store';
 import { verifyOwner } from '@/lib/auth';
 
 function sanitizeString(value: unknown, maxLength = 500): string | null {
@@ -48,17 +48,15 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ success: false, message: 'Validation failed.', errors }, { status: 400 });
     }
 
-    const review = await prisma.review.create({
-      data: {
-        name: data.name,
-        email: data.email,
-        rating: data.rating,
-        title: data.title,
-        content: data.content,
-        projectRef: data.projectRef,
-        approved: true,
-        featured: false,
-      },
+    const review = store.reviews.create({
+      name: data.name,
+      email: data.email,
+      rating: data.rating,
+      title: data.title,
+      content: data.content,
+      projectRef: data.projectRef,
+      approved: true,
+      featured: false,
     });
 
     return NextResponse.json({
@@ -80,16 +78,10 @@ export async function GET(request: NextRequest) {
     const limitParam = searchParams.get('limit');
     const limit = limitParam ? Math.min(Math.max(parseInt(limitParam, 10) || 10, 1), 50) : 10;
 
-    const where = all ? {} : { approved: true, ...(featuredOnly ? { featured: true } : {}) };
-
-    const reviews = await prisma.review.findMany({
-      where,
-      orderBy: { createdAt: 'desc' },
-      take: all ? 100 : limit,
-      select: {
-        id: true, name: true, rating: true, title: true, content: true,
-        projectRef: true, featured: true, approved: true, createdAt: true,
-      },
+    const reviews = store.reviews.findMany({
+      ...(all ? {} : { approved: true }),
+      ...(featuredOnly ? { featured: true } : {}),
+      limit: all ? 100 : limit,
     });
 
     return NextResponse.json({ success: true, data: reviews });
@@ -112,7 +104,7 @@ export async function DELETE(request: NextRequest) {
       return NextResponse.json({ success: false, message: 'Review ID required.' }, { status: 400 });
     }
 
-    await prisma.review.delete({ where: { id } });
+    store.reviews.delete(id);
     return NextResponse.json({ success: true, message: 'Review deleted.' });
   } catch (error) {
     console.error('[Reviews] DELETE error:', error);
