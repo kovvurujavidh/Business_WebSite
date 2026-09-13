@@ -71,5 +71,32 @@
   border-radius: 8px; color: #dc3c3c; font-size: 13px; margin-bottom: 14px;
 }
 
-@media (max-width: 900px) { .grid { grid-template-columns: 1fr 1fr; } }
-@media (max-width: 600px) { .grid { grid-template-columns: 1fr; } .formRow { grid-template-columns: 1fr; } .formCard { padding: 20px; } }
+@media (max-width: 900px) {
+  .grid { grid-template-columns: 1fr 1fr; gap: 12px; }
+}
+
+@media (max-width: 640px) {
+  .section { padding: 56px 0; }
+  .header { margin-bottom: 32px; }
+  .grid { grid-template-columns: 1fr; gap: 12px; }
+  .card { padding: 20px; border-radius: 10px; }
+  .cardTitle { font-size: 14px; }
+  .cardContent { font-size: 13px; line-height: 1.65; }
+  .reviewer { gap: 12px; }
+  .avatar { width: 36px; height: 36px; font-size: 13px; }
+  .name { font-size: 13px; }
+  .formRow { grid-template-columns: 1fr; }
+  .formCard { padding: 22px; border-radius: 10px; }
+  .formTitle { font-size: 1.25rem; }
+  .field input,
+  .field select,
+  .field textarea { font-size: 14px; min-height: 44px; }
+  .field textarea { min-height: 100px; }
+  .starBtn { font-size: 22px; min-width: 36px; min-height: 36px; }
+}
+
+@media (max-width: 480px) {
+  .card { padding: 18px; }
+  .formCard { padding: 20px; }
+  .formTitle { font-size: 1.2rem; }
+}

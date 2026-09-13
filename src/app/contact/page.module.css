@@ -310,3 +310,16 @@
     padding: 24px;
   }
 }
+
+@media (max-width: 640px) {
+  .pageWrapper { padding-top: 88px; padding-bottom: 64px; }
+  .title { font-size: clamp(2rem, 8vw, 2.6rem); margin-bottom: 24px; }
+  .planSummary { padding: 20px; margin-bottom: 24px; border-radius: 12px; }
+  .planName { font-size: 1.3rem; }
+  .planTagline { font-size: 13px; }
+  .planFeatures li { font-size: 13px; }
+  .formCard { padding: 20px; border-radius: 12px; }
+  .field input, .field select, .field textarea { padding: 12px; font-size: 14px; min-height: 48px; border-radius: 8px; }
+  .field textarea { min-height: 120px; }
+  .field label { font-size: 11px; }
+}

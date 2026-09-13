@@ -22,7 +22,20 @@
 .row:hover .arrow { color: var(--accent); transform: translateX(4px); }
 
 @media (max-width: 640px) {
-  .row { grid-template-columns: 30px 1fr; gap: 12px; padding: 18px 12px; }
-  .rowTitle { font-size: 1rem; }
+  .section { padding: 56px 0; }
+  .row {
+    grid-template-columns: 32px 1fr;
+    gap: 14px;
+    padding: 20px 16px;
+    min-height: auto;
+  }
+  .num { font-size: 10px; }
+  .rowTitle { font-size: 1.05rem; margin-bottom: 4px; }
+  .rowDesc { font-size: 13px; line-height: 1.6; }
   .arrow { display: none; }
+}
+
+@media (max-width: 480px) {
+  .row { grid-template-columns: 28px 1fr; gap: 12px; padding: 16px 14px; }
+  .rowTitle { font-size: 1rem; }
 }

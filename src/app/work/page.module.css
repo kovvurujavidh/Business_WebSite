@@ -63,3 +63,16 @@
 @media (max-width: 768px) {
   .projectsGrid { grid-template-columns: 1fr; }
 }
+
+@media (max-width: 640px) {
+  .pageWrapper { padding-top: 88px; padding-bottom: 64px; }
+  .title { font-size: clamp(2.2rem, 7vw, 3rem); line-height: 1.1; }
+  .projectCard { padding: 22px; border-radius: 14px; }
+  .cardHeader { margin-bottom: 12px; }
+  .projectTitle { font-size: 1.25rem; }
+  .projectDesc { font-size: 13.5px; }
+  .metricsRow { gap: 16px; margin-bottom: 14px; }
+  .metricVal { font-size: 16px; }
+  .techPill { font-size: 10px; padding: 4px 8px; }
+  .cardFooter { padding-top: 14px; }
+}

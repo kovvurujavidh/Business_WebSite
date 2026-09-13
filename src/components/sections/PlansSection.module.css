@@ -60,5 +60,18 @@
 
 @media (max-width: 640px) {
   .section { padding: 56px 0; }
-  .card { padding: 22px; }
+  .header { margin-bottom: 32px; }
+  .grid { gap: 16px; max-width: 100%; }
+  .card { padding: 24px; border-radius: 12px; }
+  .badge { font-size: 9px; padding: 4px 12px; }
+  .planName { font-size: 1.25rem; }
+  .planTagline { font-size: 13px; }
+  .features { gap: 10px; margin-bottom: 20px; }
+  .features li { font-size: 13px; line-height: 1.6; }
+  .cta { min-height: 48px; font-size: 14px; }
+}
+
+@media (max-width: 480px) {
+  .card { padding: 20px; }
+  .planName { font-size: 1.2rem; }
 }

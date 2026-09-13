@@ -49,6 +49,23 @@
 .techTag:hover { border-color: var(--accent); color: var(--accent); }
 
 @media (max-width: 768px) {
-  .grid { grid-template-columns: 1fr; gap: 36px; }
+  .grid { grid-template-columns: 1fr; gap: 40px; }
   .focusGrid { grid-template-columns: 1fr; }
+  .section { padding: 56px 0; }
+}
+
+@media (max-width: 640px) {
+  .grid { gap: 32px; }
+  .title { font-size: clamp(2.2rem, 8vw, 3rem); }
+  .lead { font-size: 15px; margin-bottom: 16px; }
+  .body { font-size: 14px; line-height: 1.75; }
+  .brandCard { padding: 16px 18px; margin-top: 16px; }
+  .brandCardTop { gap: 10px; margin-bottom: 12px; }
+  .brandCardTop img { width: 28px; height: 28px; }
+  .brandName { font-size: 11px; }
+  .brandSubtitle { font-size: 12px; }
+  .focusItem { padding: 14px 16px; }
+  .focusLabel { font-size: 14px; }
+  .techRow { gap: 8px; margin-top: 16px; }
+  .techTag { font-size: 11px; padding: 6px 14px; min-height: 32px; display: inline-flex; align-items: center; }
 }

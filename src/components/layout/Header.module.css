@@ -87,7 +87,19 @@
   .nav, .cta, .themeBtn { display: none; }
   .burger { display: flex; }
   .drawer { display: block; }
+  .header { padding: 10px 16px; }
+  .inner { padding: 0 16px; height: 52px; }
+  .brandText { font-size: 13px; }
+  .logo { width: 32px; height: 32px; }
+}
+
+@media (max-width: 480px) {
   .header { padding: 8px 12px; }
   .inner { padding: 0 12px; height: 48px; }
-  .brandText { font-size: 13px; }
+  .brandText { font-size: 12px; }
+  .logo { width: 28px; height: 28px; }
+  .burger { width: 40px; height: 40px; }
+  .drawer { left: 12px; right: 12px; top: calc(100% + 6px); }
+  .drawerLink { font-size: 16px; padding: 14px 16px; min-height: 48px; }
+  .drawerThemeBtn, .drawerCta { min-height: 48px; font-size: 14px; }
 }

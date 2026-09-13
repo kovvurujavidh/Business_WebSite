@@ -157,9 +157,24 @@
 }
 
 @media (max-width: 600px) {
-  .hero { padding-top: 64px; padding-bottom: 40px; }
-  .identity { flex-wrap: wrap; gap: 8px; margin-bottom: 16px; }
-  .headlineLine, .headline { font-size: clamp(2rem, 8vw, 2.6rem); }
-  .subtitle { font-size: 15px; margin-bottom: 20px; }
-  .ctas { flex-direction: column; }
+  .hero { padding-top: 80px; padding-bottom: 48px; }
+  .showcase { margin-bottom: 32px; }
+  .identity { flex-wrap: wrap; gap: 10px; margin-bottom: 20px; }
+  .name { font-size: 10px; }
+  .role { font-size: 12px; }
+  .headlineLine, .headline { font-size: clamp(2rem, 9vw, 2.8rem); line-height: 1.1; }
+  .subtitle { font-size: 15px; margin-bottom: 24px; line-height: 1.7; }
+  .ctas {
+    flex-direction: column;
+    gap: 12px;
+    width: 100%;
+  }
+  .ctas a { width: 100%; justify-content: center; }
+  .proof { font-size: 11px; margin-top: 4px; }
+}
+
+@media (max-width: 480px) {
+  .hero { padding-top: 72px; padding-bottom: 40px; }
+  .headlineLine, .headline { font-size: clamp(1.75rem, 10vw, 2.2rem); }
+  .subtitle { font-size: 14px; }
 }

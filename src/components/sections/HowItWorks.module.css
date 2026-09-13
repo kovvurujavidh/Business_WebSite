@@ -67,9 +67,28 @@
 .stepDesc { font-size: 14px; color: var(--muted); line-height: 1.55; }
 
 @media (max-width: 640px) {
-  .statsRow { flex-direction: column; gap: 16px; padding: 16px 20px; }
-  .stepsContainer { grid-template-columns: 32px 1fr; gap: 0 20px; }
-  .step { grid-template-columns: 32px 1fr; gap: 12px; padding: 16px 0; }
+  .section { padding: 56px 0; }
+  .header { margin-bottom: 28px; }
+  .statsRow {
+    flex-direction: column;
+    gap: 20px;
+    padding: 18px 20px;
+    border-radius: 10px;
+  }
+  .stat { gap: 4px; }
+  .statValue { font-size: 16px; }
+  .statLabel { font-size: 12px; }
+  .stepsContainer { grid-template-columns: 36px 1fr; gap: 0 20px; max-width: 100%; }
+  .step { grid-template-columns: 36px 1fr; gap: 14px; padding: 18px 0; }
+  .stepDot { width: 36px; height: 36px; }
+  .stepTitle { font-size: 1.05rem; }
+  .stepDesc { font-size: 13.5px; line-height: 1.65; }
+}
+
+@media (max-width: 480px) {
+  .stepsContainer { grid-template-columns: 32px 1fr; gap: 0 16px; }
+  .step { grid-template-columns: 32px 1fr; gap: 12px; }
   .stepDot { width: 32px; height: 32px; }
   .stepTitle { font-size: 1rem; }
+  .stepDesc { font-size: 13px; }
 }
