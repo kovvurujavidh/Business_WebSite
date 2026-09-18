@@ -59,7 +59,6 @@ export function HomeHero() {
               display: "inline-flex", alignItems: "center", gap: 8,
               padding: "15px 30px", borderRadius: 12, fontSize: 14, fontWeight: 600,
               background: "var(--gradient-1)", color: "#fff",
-              transition: "transform 0.2s, box-shadow 0.2s",
               position: "relative", zIndex: 1,
             }}
           >
@@ -68,13 +67,13 @@ export function HomeHero() {
           </Link>
           <Link
             href="/#projects"
+            className="btn-secondary"
             style={{
               display: "inline-flex", alignItems: "center", gap: 8,
               padding: "15px 30px", borderRadius: 12, fontSize: 14, fontWeight: 600,
               background: "rgba(255,255,255,0.06)", color: "#fff",
               border: "1px solid rgba(255,255,255,0.15)",
               backdropFilter: "blur(4px)",
-              transition: "all 0.2s",
             }}
           >
             View My Work

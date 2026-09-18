@@ -111,7 +111,7 @@ export function HomeContact() {
                   display: "inline-flex", alignItems: "center", gap: 8,
                   padding: "14px 28px", borderRadius: 12, fontSize: 14, fontWeight: 600,
                   background: "var(--gradient-1)", color: "#fff", border: "none", cursor: "pointer",
-                  opacity: isSubmitting ? 0.6 : 1, transition: "opacity 0.2s, transform 0.2s",
+                  opacity: isSubmitting ? 0.6 : 1,
                   position: "relative", zIndex: 1,
                 }}
               >

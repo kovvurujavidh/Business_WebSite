@@ -23,7 +23,6 @@ export function Footer() {
               display: "inline-flex", alignItems: "center", gap: 8,
               padding: "15px 32px", borderRadius: 12, fontSize: 14, fontWeight: 600,
               background: "var(--gradient-1)", color: "#fff",
-              transition: "transform 0.2s",
               position: "relative", zIndex: 1,
             }}
           >
@@ -35,7 +34,17 @@ export function Footer() {
         <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))", gap: 48, marginBottom: 48 }}>
           <div>
             <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 16 }}>
-              <div style={{ width: 36, height: 36, borderRadius: 8, background: "var(--gradient-1)", display: "flex", alignItems: "center", justifyContent: "center", color: "#fff", fontSize: 14, fontWeight: 800 }}>L</div>
+              <svg width="36" height="36" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                  <linearGradient id="footer-logo-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" stopColor="#6366f1" />
+                    <stop offset="100%" stopColor="#ec4899" />
+                  </linearGradient>
+                </defs>
+                <rect width="36" height="36" rx="10" fill="url(#footer-logo-grad)" />
+                <path d="M10 12V24M10 12H16C18.2 12 20 13.8 20 16V16C20 18.2 18.2 20 16 20H10M16 20H18C20.2 20 22 21.8 22 24V24" stroke="white" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
+                <path d="M24 12V24M24 12H26C27.1 12 28 12.9 28 14V14C28 15.1 27.1 16 26 16H24" stroke="white" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" opacity="0.5" />
+              </svg>
               <span style={{ fontWeight: 800, fontSize: 16 }}>LOCALBIZZ</span>
             </div>
             <p style={{ fontSize: 13, color: "var(--muted)", lineHeight: 1.7 }}>
@@ -68,7 +77,7 @@ export function Footer() {
         <div style={{ borderTop: "1px solid var(--line)", paddingTop: 24, display: "flex", justifyContent: "space-between", alignItems: "center", flexWrap: "wrap", gap: 12 }}>
           <p style={{ fontSize: 13, color: "var(--muted)" }}>&copy; {year} LocalBizz. Founded by Javidh.</p>
           <div style={{ display: "flex", alignItems: "center", gap: 8, fontSize: 13, color: "var(--muted)" }}>
-            <span style={{ width: 6, height: 6, borderRadius: "50%", background: "#22c55e", boxShadow: "0 0 8px #22c55e" }} />
+            <span style={{ width: 8, height: 8, borderRadius: "50%", background: "#22c55e", boxShadow: "0 0 12px rgba(34,197,94,0.5)", animation: "pulse-glow-green 2s ease-in-out infinite" }} />
             Open to projects
           </div>
         </div>

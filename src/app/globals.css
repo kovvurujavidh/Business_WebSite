@@ -128,6 +128,11 @@ a { color: inherit; text-decoration: none; }
   50% { box-shadow: 0 0 40px rgba(99, 102, 241, 0.5); }
 }
 
+@keyframes pulse-glow-green {
+  0%, 100% { box-shadow: 0 0 8px rgba(34,197,94,0.4); }
+  50% { box-shadow: 0 0 16px rgba(34,197,94,0.7); }
+}
+
 @keyframes gradient-shift {
   0% { background-position: 0% 50%; }
   50% { background-position: 100% 50%; }
@@ -252,6 +257,21 @@ a { color: inherit; text-decoration: none; }
 .btn-glow {
   position: relative;
   overflow: hidden;
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.35s ease, filter 0.35s ease;
+}
+.btn-glow::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+  transition: left 0.5s ease;
+  pointer-events: none;
+}
+.btn-glow:hover::before {
+  left: 100%;
 }
 .btn-glow::after {
   content: '';
@@ -261,11 +281,32 @@ a { color: inherit; text-decoration: none; }
   background: var(--gradient-1);
   opacity: 0;
   z-index: -1;
-  transition: opacity 0.3s ease;
-  filter: blur(12px);
+  transition: opacity 0.35s ease;
+  filter: blur(14px);
 }
 .btn-glow:hover::after {
-  opacity: 0.4;
+  opacity: 0.5;
+}
+.btn-glow:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(99, 102, 241, 0.35), 0 4px 10px rgba(0,0,0,0.1);
+}
+.btn-glow:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 8px rgba(99, 102, 241, 0.2);
+}
+
+/* Secondary button */
+.btn-secondary {
+  position: relative;
+  overflow: hidden;
+  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.btn-secondary:hover {
+  transform: translateY(-2px);
+  background: rgba(255,255,255,0.1) !important;
+  border-color: rgba(255,255,255,0.25) !important;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.15);
 }
 
 /* Marquee */

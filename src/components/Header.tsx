@@ -36,13 +36,23 @@ export function Header() {
     >
       <div style={{ maxWidth: 1120, margin: "0 auto", padding: "0 20px", display: "flex", alignItems: "center", justifyContent: "space-between", height: 68 }}>
         <Link href="/" style={{ display: "flex", alignItems: "center", gap: 10, fontWeight: 800, fontSize: 18, letterSpacing: "-0.02em" }}>
-          <div style={{ width: 32, height: 32, borderRadius: 8, background: "var(--gradient-1)", display: "flex", alignItems: "center", justifyContent: "center", color: "#fff", fontSize: 14, fontWeight: 800 }}>L</div>
+          <svg width="36" height="36" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <linearGradient id="logo-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stopColor="#6366f1" />
+                <stop offset="100%" stopColor="#ec4899" />
+              </linearGradient>
+            </defs>
+            <rect width="36" height="36" rx="10" fill="url(#logo-grad)" />
+            <path d="M10 12V24M10 12H16C18.2 12 20 13.8 20 16V16C20 18.2 18.2 20 16 20H10M16 20H18C20.2 20 22 21.8 22 24V24" stroke="white" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
+            <path d="M24 12V24M24 12H26C27.1 12 28 12.9 28 14V14C28 15.1 27.1 16 26 16H24" stroke="white" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" opacity="0.5" />
+          </svg>
           <span>LOCALBIZZ</span>
         </Link>
 
         <nav style={{ display: "flex", gap: 6 }} className="nav-desktop">
           {NAV_LINKS.map((l) => (
-            <Link key={l.href} href={l.href} style={{ fontSize: 13, fontWeight: 500, color: "var(--muted)", padding: "8px 14px", borderRadius: 8, transition: "all 0.2s" }}>
+            <Link key={l.href} href={l.href} style={{ fontSize: 13, fontWeight: 500, color: "var(--muted)", padding: "8px 14px", borderRadius: 8, transition: "all 0.25s cubic-bezier(0.16, 1, 0.3, 1)" }}>
               {l.label}
             </Link>
           ))}
@@ -68,7 +78,6 @@ export function Header() {
               display: "inline-flex", alignItems: "center", gap: 6,
               padding: "10px 20px", borderRadius: 10, fontSize: 13, fontWeight: 600,
               background: "var(--gradient-1)", color: "#fff",
-              transition: "transform 0.2s",
               position: "relative", zIndex: 1,
             }}
           >
