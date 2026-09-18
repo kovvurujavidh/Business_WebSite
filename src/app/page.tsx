@@ -1,25 +1,19 @@
-import { Hero } from "@/components/sections/Hero";
-import { About } from "@/components/sections/About";
-import { Marquee } from "@/components/sections/Marquee";
-import { FeaturedProjects } from "@/components/sections/FeaturedProjects";
-import { Services } from "@/components/sections/Services";
-import { PlansSection } from "@/components/sections/PlansSection";
-import { HowItWorks } from "@/components/sections/HowItWorks";
-import { ReviewsSection } from "@/components/sections/ReviewsSection";
-import { EnquirySection } from "@/components/sections/EnquirySection";
+import { HomeHero } from "@/components/sections/HomeHero";
+import { HomeAbout } from "@/components/sections/HomeAbout";
+import { HomeProjects } from "@/components/sections/HomeProjects";
+import { HomeServices } from "@/components/sections/HomeServices";
+import { HomeProcess } from "@/components/sections/HomeProcess";
+import { HomeContact } from "@/components/sections/HomeContact";
 
 export default function Home() {
   return (
     <>
-      <Hero />
-      <About />
-      <Marquee />
-      <FeaturedProjects />
-      <Services />
-      <PlansSection />
-      <HowItWorks />
-      <ReviewsSection />
-      <EnquirySection />
+      <HomeHero />
+      <HomeAbout />
+      <HomeProjects />
+      <HomeServices />
+      <HomeProcess />
+      <HomeContact />
     </>
   );
 }

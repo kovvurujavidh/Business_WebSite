@@ -1,19 +1,15 @@
 import Link from "next/link";
-import styles from "./not-found.module.css";
 
 export default function NotFound() {
   return (
-    <div className={styles.page}>
-      <div className="container">
-        <div className={styles.content}>
-          <span className={styles.code}>404</span>
-          <h1 className={styles.title}>Page not found.</h1>
-          <p className={styles.desc}>The page you&apos;re looking for doesn&apos;t exist or has been moved.</p>
-          <Link href="/" className="btn-primary">
-            Back to Home
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
-          </Link>
-        </div>
+    <div style={{ minHeight: "100vh", display: "flex", alignItems: "center", justifyContent: "center", padding: 20 }}>
+      <div style={{ textAlign: "center" }}>
+        <h1 style={{ fontSize: 72, fontWeight: 800, color: "var(--accent)", marginBottom: 8 }}>404</h1>
+        <h2 style={{ fontSize: 24, fontWeight: 700, marginBottom: 12 }}>Page Not Found</h2>
+        <p style={{ color: "var(--muted)", marginBottom: 24 }}>The page you&apos;re looking for doesn&apos;t exist.</p>
+        <Link href="/" style={{ display: "inline-flex", alignItems: "center", gap: 8, padding: "12px 24px", borderRadius: 10, fontSize: 14, fontWeight: 600, background: "var(--accent)", color: "#fff" }}>
+          ← Back to Home
+        </Link>
       </div>
     </div>
   );

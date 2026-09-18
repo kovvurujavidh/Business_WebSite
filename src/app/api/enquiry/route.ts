@@ -1,112 +1,54 @@
-import { NextRequest, NextResponse } from 'next/server';
-import { store } from '@/lib/store';
-import { sendTelegramNotification } from '@/lib/telegram';
+import { NextRequest, NextResponse } from "next/server";
 
 function validateEmail(email: string): boolean {
   return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
 }
 
-function sanitizeString(value: unknown, maxLength = 500): string | null {
-  if (typeof value !== 'string') return null;
+function sanitize(value: unknown, max = 500): string | null {
+  if (typeof value !== "string") return null;
   const trimmed = value.trim();
-  if (trimmed.length === 0) return null;
-  return trimmed.slice(0, maxLength);
-}
-
-function validateInput(body: Record<string, unknown>) {
-  const errors: string[] = [];
-
-  const name = sanitizeString(body.name, 100);
-  const email = sanitizeString(body.email, 254);
-  const phone = sanitizeString(body.phone, 20);
-  const subject = sanitizeString(body.subject, 200);
-  const message = sanitizeString(body.message, 2000);
-  const projectType = sanitizeString(body.projectType, 100);
-  const budget = sanitizeString(body.budget, 50);
-  const timeline = sanitizeString(body.timeline, 50);
-  const plan = sanitizeString(body.plan, 50);
-
-  if (!name) errors.push('Name is required.');
-  if (!email) {
-    errors.push('Email is required.');
-  } else if (!validateEmail(email)) {
-    errors.push('Invalid email format.');
-  }
-  if (!subject) errors.push('Subject is required.');
-  if (!message) errors.push('Message is required.');
-
-  return {
-    valid: errors.length === 0,
-    errors,
-    data: { name: name || '', email: email || '', phone, subject: subject || '', message: message || '', projectType, budget, timeline, plan },
-  };
+  if (!trimmed) return null;
+  return trimmed.slice(0, max);
 }
 
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json();
-
-    if (typeof body !== 'object' || body === null) {
-      return NextResponse.json(
-        { success: false, message: 'Invalid request body.' },
-        { status: 400 }
-      );
+    if (typeof body !== "object" || body === null) {
+      return NextResponse.json({ success: false, message: "Invalid request body." }, { status: 400 });
     }
 
-    const { valid, errors, data } = validateInput(body);
+    const name = sanitize(body.name, 100);
+    const email = sanitize(body.email, 254);
+    const subject = sanitize(body.subject, 200);
+    const message = sanitize(body.message, 2000);
 
-    if (!valid) {
-      return NextResponse.json(
-        { success: false, message: 'Validation failed.', errors },
-        { status: 400 }
-      );
+    if (!name || !email || !subject || !message) {
+      return NextResponse.json({ success: false, message: "Please fill out all required fields." }, { status: 400 });
+    }
+    if (!validateEmail(email)) {
+      return NextResponse.json({ success: false, message: "Invalid email format." }, { status: 400 });
     }
 
-    const enquiry = store.enquiries.create({
-      name: data.name,
-      email: data.email,
-      phone: data.phone || null,
-      subject: data.subject,
-      message: data.message,
-      projectType: data.projectType || null,
-      budget: data.budget || null,
-      timeline: data.timeline || null,
-      plan: data.plan || null,
-    });
+    const enquiry = {
+      id: Date.now().toString(36),
+      name, email,
+      phone: sanitize(body.phone, 20),
+      subject, message,
+      projectType: sanitize(body.projectType, 100),
+      budget: sanitize(body.budget, 50),
+      plan: sanitize(body.plan, 50),
+      createdAt: new Date().toISOString(),
+    };
 
-    let telegramSent = false;
-    try {
-      telegramSent = await sendTelegramNotification({
-        name: data.name,
-        email: data.email,
-        phone: data.phone ?? undefined,
-        subject: data.subject,
-        message: data.message,
-        projectType: data.projectType ?? undefined,
-        budget: data.budget ?? undefined,
-        timeline: data.timeline ?? undefined,
-      });
-    } catch {
-      console.error('[Enquiry] Telegram notification failed, but enquiry was saved.');
-    }
-
-    if (telegramSent) {
-      store.enquiries.update(enquiry.id, { telegramNotified: true });
-    }
+    console.log("[Enquiry]", JSON.stringify(enquiry, null, 2));
 
     return NextResponse.json(
-      {
-        success: true,
-        message: 'Enquiry submitted successfully. We will get back to you shortly.',
-        data: { id: enquiry.id },
-      },
+      { success: true, message: "Enquiry submitted successfully.", data: { id: enquiry.id } },
       { status: 201 }
     );
   } catch (error) {
-    console.error('[Enquiry] API error:', error);
-    return NextResponse.json(
-      { success: false, message: 'An unexpected error occurred. Please try again later.' },
-      { status: 500 }
-    );
+    console.error("[Enquiry] API error:", error);
+    return NextResponse.json({ success: false, message: "An unexpected error occurred." }, { status: 500 });
   }
 }

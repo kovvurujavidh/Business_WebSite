@@ -1,394 +1,179 @@
 import React from "react";
 import Link from "next/link";
-import Image from "next/image";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import { getAllProjects, getProjectById } from "@/data/projects";
-import styles from "./page.module.css";
 
 interface PageProps {
   params: Promise<{ id: string }>;
 }
 
 export async function generateStaticParams() {
-  const projects = getAllProjects();
-  return projects.map((project) => ({
-    id: project.id,
-  }));
+  return getAllProjects().map((p) => ({ id: p.id }));
 }
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { id } = await params;
   const project = getProjectById(id);
-
-  if (!project) {
-    return { title: "Project Not Found" };
-  }
-
+  if (!project) return { title: "Project Not Found" };
   return {
-    title: `${project.title}`,
+    title: project.title,
     description: project.tagline || project.description,
-    keywords: [project.category, project.title, "LocalBizz", "web developer", ...project.techStack],
-    openGraph: {
-      title: `${project.title} — LocalBizz`,
-      description: project.tagline || project.description,
-      url: `https://localbizz.dpdns.org/work/${project.id}`,
-      images: [
-        {
-          url: `https://localbizz.vercel.app/og.svg`,
-          width: 1200,
-          height: 630,
-          alt: project.title,
-        },
-      ],
-    },
-    twitter: {
-      card: "summary_large_image",
-      title: `${project.title} — LocalBizz`,
-      description: project.tagline || project.description,
-    },
-    alternates: {
-      canonical: `https://localbizz.dpdns.org/work/${project.id}`,
-    },
+    openGraph: { title: `${project.title} — LocalBizz`, description: project.tagline || project.description },
   };
 }
 
 export default async function ProjectDetailPage({ params }: PageProps) {
   const { id } = await params;
   const project = getProjectById(id);
-
-  if (!project) {
-    notFound();
-  }
+  if (!project) notFound();
 
   const allProjects = getAllProjects();
   const currentIndex = allProjects.findIndex((p) => p.id === id);
   const nextProject = allProjects[(currentIndex + 1) % allProjects.length];
 
   return (
-    <div className={styles.pageWrapper}>
-      <div className="container">
-        {/* 1. TOP NAVIGATION / BACK BUTTON */}
-        <div className={styles.topNav}>
-          <Link href="/#projects" className={styles.backLink}>
-            <svg
-              width="16"
-              height="16"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2.5"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            >
-              <line x1="19" y1="12" x2="5" y2="12" />
-              <polyline points="12 19 5 12 12 5" />
-            </svg>
-            <span>Back to Projects</span>
+    <div style={{ paddingTop: 100, paddingBottom: 80, minHeight: "100vh", position: "relative" }}>
+      <div style={{ position: "absolute", inset: 0, background: "var(--gradient-mesh)", pointerEvents: "none" }} />
+      <div style={{ maxWidth: 1120, margin: "0 auto", padding: "0 20px", position: "relative" }}>
+        {/* Top nav */}
+        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 40 }}>
+          <Link href="/#projects" style={{ display: "flex", alignItems: "center", gap: 6, fontSize: 13, fontWeight: 500, color: "var(--muted)", transition: "color 0.2s" }}>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+            Back to Projects
           </Link>
-          <span className={styles.topIndex}>
-            0{currentIndex + 1} / 0{allProjects.length}
-          </span>
+          <span style={{ fontSize: 13, color: "var(--muted)" }}>0{currentIndex + 1} / 0{allProjects.length}</span>
         </div>
 
-        {/* 2. PROJECT HERO */}
-        <header className={styles.hero}>
-          <div className={styles.heroMetaRow}>
-            <span className={styles.heroCategory}>{project.category}</span>
-            <span className={styles.heroMetaDot} />
-            <span className={styles.heroYear}>{project.year}</span>
+        {/* Hero */}
+        <header style={{ marginBottom: 48 }}>
+          <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 18 }}>
+            <span style={{ fontSize: 12, fontWeight: 600, padding: "5px 12px", borderRadius: 8, background: "var(--gradient-1)", color: "#fff" }}>{project.category}</span>
+            <span style={{ fontSize: 12, color: "var(--muted)" }}>{project.year}</span>
           </div>
-
-          <h1 className={styles.heroTitle}>{project.title}</h1>
-
-          {project.tagline && (
-            <p className={styles.heroTagline}>{project.tagline}</p>
-          )}
-
-          <div className={styles.heroActions}>
+          <h1 style={{ fontSize: "clamp(2rem, 5vw, 3.5rem)", fontWeight: 800, letterSpacing: "-0.03em", marginBottom: 14 }}>{project.title}</h1>
+          {project.tagline && <p style={{ fontSize: 17, color: "var(--muted)", maxWidth: 600, lineHeight: 1.7 }}>{project.tagline}</p>}
+          <div style={{ display: "flex", gap: 12, marginTop: 24, flexWrap: "wrap" }}>
             {project.liveUrl && (
-              <a
-                href={project.liveUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className={styles.btnPrimaryLink}
-              >
-                <span>View Live Site</span>
-                <svg
-                  width="15"
-                  height="15"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2.5"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                >
-                  <line x1="7" y1="17" x2="17" y2="7" />
-                  <polyline points="7 7 17 7 17 17" />
-                </svg>
+              <a href={project.liveUrl} target="_blank" rel="noopener noreferrer" className="btn-glow" style={{ display: "inline-flex", alignItems: "center", gap: 6, padding: "12px 24px", borderRadius: 10, fontSize: 13, fontWeight: 600, background: "var(--gradient-1)", color: "#fff", position: "relative", zIndex: 1 }}>
+                View Live Site ↗
               </a>
             )}
             {project.githubUrl && (
-              <a
-                href={project.githubUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className={styles.btnSecondaryLink}
-              >
-                <span>View on GitHub</span>
-                <svg
-                  width="16"
-                  height="16"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                >
-                  <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22" />
-                </svg>
+              <a href={project.githubUrl} target="_blank" rel="noopener noreferrer" style={{ display: "inline-flex", alignItems: "center", gap: 6, padding: "12px 24px", borderRadius: 10, fontSize: 13, fontWeight: 600, border: "1px solid var(--line-strong)", color: "var(--fg)", background: "var(--card-bg)", transition: "all 0.2s" }}>
+                View on GitHub ↗
               </a>
             )}
           </div>
         </header>
 
-        {/* 3. PROJECT VISUAL SHOWCASE */}
-        <div className={styles.visualContainer}>
-          {project.image ? (
-            <div className={styles.visualFrame}>
-              <Image
-                src={project.image}
-                alt={project.title}
-                fill
-                priority
-                sizes="(max-width: 1200px) 100vw, 1140px"
-                className={styles.visualImage}
-              />
+        {/* Visual */}
+        {project.image && (
+          <div className="img-zoom" style={{ borderRadius: 18, overflow: "hidden", marginBottom: 48, background: project.accentColor, aspectRatio: "16/8", position: "relative" }}>
+            <img src={project.image} alt={project.title} loading="lazy" style={{ width: "100%", height: "100%", objectFit: "cover" }} />
+            <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to top, rgba(0,0,0,0.15) 0%, transparent 30%)" }} />
+          </div>
+        )}
+
+        {/* Meta strip */}
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(140px, 1fr))", gap: 16, marginBottom: 56, padding: 24, background: "var(--card-bg)", borderRadius: 14, border: "1px solid var(--card-border)" }}>
+          {[
+            { label: "Role", value: project.role },
+            { label: "Year", value: project.year },
+            { label: "Client", value: project.client },
+            { label: "Category", value: project.category },
+          ].map((m) => (
+            <div key={m.label}>
+              <div style={{ fontSize: 11, fontWeight: 600, textTransform: "uppercase", letterSpacing: "0.1em", color: "var(--muted)", marginBottom: 4 }}>{m.label}</div>
+              <div style={{ fontSize: 14, fontWeight: 600 }}>{m.value}</div>
             </div>
-          ) : (
-            <div
-              className={styles.visualPlaceholder}
-              style={{ background: project.accentColor || "var(--bg-surface)" }}
-            >
-              <div className={styles.placeholderInner}>
-                <span className={styles.placeholderBadge}>{project.category}</span>
-                <h2 className={styles.placeholderTitle}>{project.title}</h2>
-              </div>
-            </div>
-          )}
+          ))}
         </div>
 
-        {/* 4. METADATA STRIP */}
-        <div className={styles.metaStrip}>
-          <div className={styles.metaItem}>
-            <span className={styles.metaLabel}>Role</span>
-            <span className={styles.metaValue}>
-              {project.role || "Independent Developer"}
-            </span>
-          </div>
-          <div className={styles.metaItem}>
-            <span className={styles.metaLabel}>Year</span>
-            <span className={styles.metaValue}>{project.year}</span>
-          </div>
-          <div className={styles.metaItem}>
-            <span className={styles.metaLabel}>Client / Context</span>
-            <span className={styles.metaValue}>{project.client}</span>
-          </div>
-          <div className={styles.metaItem}>
-            <span className={styles.metaLabel}>Category</span>
-            <span className={styles.metaValue}>{project.category}</span>
-          </div>
-        </div>
-
-        {/* 5. EDITORIAL CASE STUDY CONTENT */}
-        <div className={styles.caseContent}>
-          {/* Project Overview */}
+        {/* Content */}
+        <div style={{ maxWidth: 720 }}>
           {(project.longDescription || project.description) && (
-            <section className={styles.editorialSection}>
-              <div className={styles.sectionHeaderCol}>
-                <span className="section-label">Overview</span>
-                <h2 className={styles.sectionHeading}>Project Overview</h2>
+            <section style={{ marginBottom: 48 }}>
+              <div style={{ display: "inline-flex", alignItems: "center", gap: 8, color: "var(--accent)", fontSize: 11, letterSpacing: "0.12em", textTransform: "uppercase", fontWeight: 600, marginBottom: 8 }}>
+                <span style={{ width: 18, height: 1.5, background: "var(--gradient-1)", borderRadius: 1 }} />
+                Overview
               </div>
-              <div className={styles.sectionBodyCol}>
-                <p className={styles.leadParagraph}>
-                  {project.longDescription || project.description}
-                </p>
-                {project.longDescription &&
-                  project.description &&
-                  project.longDescription !== project.description && (
-                    <p className={styles.bodyParagraph}>{project.description}</p>
-                  )}
-              </div>
+              <h2 style={{ fontSize: 24, fontWeight: 800, letterSpacing: "-0.02em", marginBottom: 14 }}>Project Overview</h2>
+              <p style={{ fontSize: 15, color: "var(--fg-soft)", lineHeight: 1.8 }}>{project.longDescription || project.description}</p>
             </section>
           )}
 
-          {/* Metrics if present */}
-          {project.metrics && project.metrics.length > 0 && (
-            <section className={styles.editorialSection}>
-              <div className={styles.sectionHeaderCol}>
-                <span className="section-label">Impact</span>
-                <h2 className={styles.sectionHeading}>Key Results</h2>
-              </div>
-              <div className={styles.sectionBodyCol}>
-                <div className={styles.metricsGrid}>
-                  {project.metrics.map((m, idx) => (
-                    <div key={idx} className={styles.metricCard}>
-                      <span className={styles.metricVal}>{m.value}</span>
-                      <span className={styles.metricLbl}>{m.label}</span>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </section>
-          )}
-
-          {/* The Challenge */}
           {project.challenge && (
-            <section className={styles.editorialSection}>
-              <div className={styles.sectionHeaderCol}>
-                <span className="section-label">Problem</span>
-                <h2 className={styles.sectionHeading}>The Challenge</h2>
+            <section style={{ marginBottom: 48 }}>
+              <div style={{ display: "inline-flex", alignItems: "center", gap: 8, color: "var(--accent)", fontSize: 11, letterSpacing: "0.12em", textTransform: "uppercase", fontWeight: 600, marginBottom: 8 }}>
+                <span style={{ width: 18, height: 1.5, background: "var(--gradient-2)", borderRadius: 1 }} />
+                Problem
               </div>
-              <div className={styles.sectionBodyCol}>
-                <p className={styles.bodyParagraph}>{project.challenge}</p>
-              </div>
+              <h2 style={{ fontSize: 24, fontWeight: 800, letterSpacing: "-0.02em", marginBottom: 14 }}>The Challenge</h2>
+              <p style={{ fontSize: 15, color: "var(--fg-soft)", lineHeight: 1.8 }}>{project.challenge}</p>
             </section>
           )}
 
-          {/* The Solution */}
           {project.solution && (
-            <section className={styles.editorialSection}>
-              <div className={styles.sectionHeaderCol}>
-                <span className="section-label">Execution</span>
-                <h2 className={styles.sectionHeading}>The Solution</h2>
+            <section style={{ marginBottom: 48 }}>
+              <div style={{ display: "inline-flex", alignItems: "center", gap: 8, color: "var(--accent)", fontSize: 11, letterSpacing: "0.12em", textTransform: "uppercase", fontWeight: 600, marginBottom: 8 }}>
+                <span style={{ width: 18, height: 1.5, background: "var(--gradient-3)", borderRadius: 1 }} />
+                Execution
               </div>
-              <div className={styles.sectionBodyCol}>
-                <p className={styles.bodyParagraph}>{project.solution}</p>
-              </div>
+              <h2 style={{ fontSize: 24, fontWeight: 800, letterSpacing: "-0.02em", marginBottom: 14 }}>The Solution</h2>
+              <p style={{ fontSize: 15, color: "var(--fg-soft)", lineHeight: 1.8 }}>{project.solution}</p>
             </section>
           )}
 
-          {/* Key Deliverables / Features */}
           {project.features && project.features.length > 0 && (
-            <section className={styles.editorialSection}>
-              <div className={styles.sectionHeaderCol}>
-                <span className="section-label">Highlights</span>
-                <h2 className={styles.sectionHeading}>Key Deliverables</h2>
+            <section style={{ marginBottom: 48 }}>
+              <div style={{ display: "inline-flex", alignItems: "center", gap: 8, color: "var(--accent)", fontSize: 11, letterSpacing: "0.12em", textTransform: "uppercase", fontWeight: 600, marginBottom: 8 }}>
+                <span style={{ width: 18, height: 1.5, background: "var(--gradient-4)", borderRadius: 1 }} />
+                Highlights
               </div>
-              <div className={styles.sectionBodyCol}>
-                <div className={styles.featuresGrid}>
-                  {project.features.map((feature, idx) => (
-                    <div key={idx} className={styles.featureCard}>
-                      <span className={styles.featureNum}>0{idx + 1}</span>
-                      <h3 className={styles.featureTitle}>{feature.title}</h3>
-                      <p className={styles.featureDesc}>{feature.description}</p>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </section>
-          )}
-
-          {/* Architecture / Structural highlights */}
-          {project.architecture && project.architecture.length > 0 && (
-            <section className={styles.editorialSection}>
-              <div className={styles.sectionHeaderCol}>
-                <span className="section-label">Structure</span>
-                <h2 className={styles.sectionHeading}>Architecture</h2>
-              </div>
-              <div className={styles.sectionBodyCol}>
-                <ul className={styles.archList}>
-                  {project.architecture.map((item, idx) => (
-                    <li key={idx} className={styles.archItem}>
-                      <span className={styles.archBullet}>—</span>
-                      <span>{item}</span>
-                    </li>
-                  ))}
-                </ul>
+              <h2 style={{ fontSize: 24, fontWeight: 800, letterSpacing: "-0.02em", marginBottom: 18 }}>Key Deliverables</h2>
+              <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(280px, 1fr))", gap: 14 }}>
+                {project.features.map((f, i) => (
+                  <div key={i} className="hover-lift card-shine" style={{ padding: 20, background: "var(--card-bg)", borderRadius: 12, border: "1px solid var(--card-border)", transition: "transform 0.3s, box-shadow 0.3s" }}>
+                    <span style={{ fontSize: 12, fontWeight: 700, background: "var(--gradient-1)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text", display: "block", marginBottom: 8 }}>0{i + 1}</span>
+                    <h3 style={{ fontSize: 15, fontWeight: 700, marginBottom: 6 }}>{f.title}</h3>
+                    <p style={{ fontSize: 13, color: "var(--muted)", lineHeight: 1.6 }}>{f.description}</p>
+                  </div>
+                ))}
               </div>
             </section>
           )}
 
-          {/* Technologies */}
           {project.techStack && project.techStack.length > 0 && (
-            <section className={styles.editorialSection}>
-              <div className={styles.sectionHeaderCol}>
-                <span className="section-label">Stack</span>
-                <h2 className={styles.sectionHeading}>Technologies</h2>
+            <section style={{ marginBottom: 48 }}>
+              <div style={{ display: "inline-flex", alignItems: "center", gap: 8, color: "var(--accent)", fontSize: 11, letterSpacing: "0.12em", textTransform: "uppercase", fontWeight: 600, marginBottom: 8 }}>
+                <span style={{ width: 18, height: 1.5, background: "var(--gradient-5)", borderRadius: 1 }} />
+                Stack
               </div>
-              <div className={styles.sectionBodyCol}>
-                <div className={styles.techCluster}>
-                  {project.techStack.map((tech) => (
-                    <span key={tech} className={styles.techPill}>
-                      {tech}
-                    </span>
-                  ))}
-                </div>
+              <h2 style={{ fontSize: 24, fontWeight: 800, letterSpacing: "-0.02em", marginBottom: 14 }}>Technologies</h2>
+              <div style={{ display: "flex", flexWrap: "wrap", gap: 8 }}>
+                {project.techStack.map((t) => (
+                  <span key={t} style={{ padding: "8px 18px", borderRadius: 8, fontSize: 13, fontWeight: 600, background: "var(--card-bg)", border: "1px solid var(--card-border)" }}>{t}</span>
+                ))}
               </div>
             </section>
           )}
         </div>
 
-        {/* 6. NEXT PROJECT TRANSITION */}
+        {/* Next project */}
         {nextProject && (
-          <section className={styles.nextSection}>
-            <Link
-              href={`/work/${nextProject.id}`}
-              className={styles.nextCard}
-            >
-              <div className={styles.nextInfo}>
-                <span className={styles.nextLabel}>
-                  <span>Next Project</span>
-                  <svg
-                    width="14"
-                    height="14"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="2.5"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  >
-                    <line x1="5" y1="12" x2="19" y2="12" />
-                    <polyline points="12 5 19 12 12 19" />
-                  </svg>
+          <section style={{ marginTop: 64, paddingTop: 48, borderTop: "1px solid var(--line)" }}>
+            <Link href={`/work/${nextProject.id}`} className="hover-lift" style={{ display: "flex", justifyContent: "space-between", alignItems: "center", padding: 28, background: "var(--card-bg)", border: "1px solid var(--card-border)", borderRadius: 16, transition: "transform 0.3s, box-shadow 0.3s" }}>
+              <div>
+                <span style={{ fontSize: 12, fontWeight: 600, display: "flex", alignItems: "center", gap: 6, marginBottom: 10, background: "var(--gradient-1)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text" }}>
+                  Next Project
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
                 </span>
-                <h3 className={styles.nextTitle}>{nextProject.title}</h3>
-                {nextProject.tagline && (
-                  <p className={styles.nextTagline}>{nextProject.tagline}</p>
-                )}
+                <h3 style={{ fontSize: 22, fontWeight: 700 }}>{nextProject.title}</h3>
+                {nextProject.tagline && <p style={{ fontSize: 13, color: "var(--muted)", marginTop: 6 }}>{nextProject.tagline}</p>}
               </div>
-
-              {nextProject.image && (
-                <div className={styles.nextVisualPreview}>
-                  <Image
-                    src={nextProject.image}
-                    alt={nextProject.title}
-                    fill
-                    sizes="180px"
-                    className={styles.nextThumbnail}
-                  />
-                </div>
-              )}
-
-              <div className={styles.nextArrowWrap}>
-                <span className={styles.nextArrowCircle}>
-                  <svg
-                    width="20"
-                    height="20"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="2.5"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  >
-                    <line x1="5" y1="12" x2="19" y2="12" />
-                    <polyline points="12 5 19 12 12 19" />
-                  </svg>
-                </span>
+              <div style={{ width: 48, height: 48, borderRadius: "50%", background: "var(--gradient-1)", color: "#fff", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
               </div>
             </Link>
           </section>

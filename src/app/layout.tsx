@@ -1,14 +1,8 @@
-import type { Metadata, Viewport } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import type { Metadata } from "next";
 import "./globals.css";
-import { Header } from "@/components/layout/Header";
-import { Footer } from "@/components/layout/Footer";
-import { ThemeProvider } from "@/components/layout/ThemeProvider";
-import { FloatingBackground } from "@/components/three/FloatingBackground";
-import { GoogleAnalytics } from "@/components/analytics/GoogleAnalytics";
-
-const geistSans = Geist({ variable: "--font-geist-sans", subsets: ["latin"] });
-const geistMono = Geist_Mono({ variable: "--font-geist-mono", subsets: ["latin"] });
+import { Header } from "@/components/Header";
+import { Footer } from "@/components/Footer";
+import { ThemeProvider } from "@/components/ThemeProvider";
 
 const SITE_URL = "https://localbizz.dpdns.org";
 const SITE_NAME = "LocalBizz";
@@ -26,15 +20,10 @@ export const metadata: Metadata = {
     "website for hotels", "website for restaurants", "function hall website",
     "landing pages", "digital solutions", "web developer India",
     "Javidh", "freelance web developer", "small business website",
-    "business website cost", "professional website builder",
   ],
   authors: [{ name: "Javidh", url: SITE_URL }],
   creator: "Javidh",
   publisher: "LocalBizz",
-  formatDetection: { telephone: true, email: true, address: true },
-  verification: {
-    google: "l5IkZcZcaMM6_u-uIK41dWlOTRkz9pQVwUZ6om3Qdfw",
-  },
   openGraph: {
     type: "website",
     locale: "en_US",
@@ -42,87 +31,39 @@ export const metadata: Metadata = {
     siteName: SITE_NAME,
     title: "LocalBizz — Digital Solutions for Local Businesses",
     description: SITE_DESC,
-    images: [
-      {
-        url: `${SITE_URL}/og.svg`,
-        width: 1200,
-        height: 630,
-        alt: "LocalBizz — Digital Solutions for Local Businesses",
-      },
-    ],
   },
   twitter: {
     card: "summary_large_image",
     title: "LocalBizz — Digital Solutions for Local Businesses",
     description: SITE_DESC,
-    images: [`${SITE_URL}/og.svg`],
     creator: "@kovvurujavidh",
   },
-  robots: {
-    index: true,
-    follow: true,
-    googleBot: {
-      index: true,
-      follow: true,
-      "max-video-preview": -1,
-      "max-image-preview": "large",
-      "max-snippet": -1,
-    },
-  },
-  alternates: {
-    canonical: SITE_URL,
-  },
-};
-
-export const viewport: Viewport = {
-  themeColor: [
-    { media: "(prefers-color-scheme: light)", color: "#ffffff" },
-    { media: "(prefers-color-scheme: dark)", color: "#0c0b09" },
-  ],
-  width: "device-width",
-  initialScale: 1,
+  robots: { index: true, follow: true },
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
-  const jsonLd = {
-    "@context": "https://schema.org",
-    "@type": "ProfessionalService",
-    name: "LocalBizz",
-    description: SITE_DESC,
-    url: SITE_URL,
-    logo: `${SITE_URL}/logo.svg`,
-    author: {
-      "@type": "Person",
-      name: "Javidh",
-      url: SITE_URL,
-    },
-    areaServed: {
-      "@type": "Country",
-      name: "India",
-    },
-    serviceType: ["Website Development", "Landing Pages", "Digital Solutions", "Web Applications"],
-    sameAs: [
-      "https://github.com/kovvurujavidh",
-    ],
-    contactPoint: {
-      "@type": "ContactPoint",
-      contactType: "Customer Service",
-      availableLanguage: "English",
-    },
-  };
-
   return (
-    <html lang="en" className={`${geistSans.variable} ${geistMono.variable}`} suppressHydrationWarning>
+    <html lang="en" suppressHydrationWarning>
       <head>
         <script
           type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "ProfessionalService",
+              name: "LocalBizz",
+              description: SITE_DESC,
+              url: SITE_URL,
+              author: { "@type": "Person", name: "Javidh" },
+              areaServed: { "@type": "Country", name: "India" },
+              serviceType: ["Website Development", "Landing Pages", "Digital Solutions"],
+              sameAs: ["https://github.com/kovvurujavidh"],
+            }),
+          }}
         />
       </head>
       <body>
-        <GoogleAnalytics />
         <ThemeProvider>
-          <FloatingBackground />
           <Header />
           <main>{children}</main>
           <Footer />
