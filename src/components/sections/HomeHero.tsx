@@ -17,9 +17,9 @@ export function HomeHero() {
       }}
     >
       {/* Animated gradient orbs */}
-      <div className="orb" style={{ width: 600, height: 600, background: "radial-gradient(circle, rgba(99,102,241,0.25) 0%, transparent 70%)", top: "-15%", left: "-10%", animation: "float 8s ease-in-out infinite" }} />
-      <div className="orb" style={{ width: 500, height: 500, background: "radial-gradient(circle, rgba(236,72,153,0.2) 0%, transparent 70%)", bottom: "5%", right: "-8%", animation: "float 10s ease-in-out infinite 2s" }} />
-      <div className="orb" style={{ width: 350, height: 350, background: "radial-gradient(circle, rgba(6,182,212,0.15) 0%, transparent 70%)", top: "40%", left: "50%", animation: "float 12s ease-in-out infinite 4s" }} />
+      <div className="orb" style={{ width: 600, height: 600, background: "radial-gradient(circle, rgba(99,102,241,0.25) 0%, transparent 70%)", top: "-15%", left: "-10%", animation: "subtle-float 12s ease-in-out infinite" }} />
+      <div className="orb" style={{ width: 500, height: 500, background: "radial-gradient(circle, rgba(236,72,153,0.2) 0%, transparent 70%)", bottom: "5%", right: "-8%", animation: "subtle-float 15s ease-in-out infinite 3s" }} />
+      <div className="orb" style={{ width: 350, height: 350, background: "radial-gradient(circle, rgba(6,182,212,0.15) 0%, transparent 70%)", top: "40%", left: "50%", animation: "subtle-float 18s ease-in-out infinite 6s" }} />
 
       {/* Grid pattern overlay */}
       <div style={{ position: "absolute", inset: 0, backgroundImage: "radial-gradient(rgba(255,255,255,0.03) 1px, transparent 1px)", backgroundSize: "40px 40px", pointerEvents: "none" }} />

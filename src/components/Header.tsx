@@ -27,11 +27,13 @@ export function Header() {
     <header
       style={{
         position: "fixed", top: 0, left: 0, right: 0, zIndex: 50,
-        background: theme === "dark" ? "rgba(10,10,15,0.85)" : "rgba(248,249,252,0.85)",
-        backdropFilter: "blur(16px) saturate(180%)",
+        background: scrolled
+          ? (theme === "dark" ? "rgba(10,10,15,0.7)" : "rgba(248,249,252,0.7)")
+          : (theme === "dark" ? "rgba(10,10,15,0.4)" : "rgba(248,249,252,0.4)"),
+        backdropFilter: scrolled ? "blur(20px) saturate(180%)" : "blur(8px) saturate(120%)",
         borderBottom: scrolled ? "1px solid var(--line)" : "1px solid transparent",
-        transition: "all 0.3s ease",
-        boxShadow: scrolled ? "0 1px 20px rgba(0,0,0,0.08)" : "none",
+        transition: "background 0.4s ease, backdrop-filter 0.4s ease, border-color 0.4s ease, box-shadow 0.4s ease",
+        boxShadow: scrolled ? "0 4px 30px rgba(0,0,0,0.1)" : "none",
       }}
     >
       <div style={{ maxWidth: 1120, margin: "0 auto", padding: "0 20px", display: "flex", alignItems: "center", justifyContent: "space-between", height: 68 }}>
