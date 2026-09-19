@@ -162,36 +162,6 @@ export const PROJECTS: Project[] = [
     image: "/projects/revia.png",
     liveUrl: "https://revia.vercel.app",
     githubUrl: "https://github.com/kovvurujavidh/Revia"
-  },
-  {
-    id: "sripaadha-inn-website",
-    title: "Sripaadha Inn Website",
-    tagline: "Premium mobile-first hotel website",
-    category: "Business Website",
-    client: "Sripaadha Inn",
-    year: "2026",
-    role: "Designer & Developer",
-    description: "A premium, mobile-first single-page website for Sripaadha Inn, a 3-star hotel in Kakinada, Andhra Pradesh.",
-    longDescription: "A complete hotel website with smooth scroll-reveal animations, interactive gallery with lightbox, enquiry form with validation, Google Maps integration, and full accessibility support including focus-visible, semantic HTML, and ARIA labels.",
-    challenge: "Creating a premium hotel experience that works flawlessly on mobile while providing all essential information — rooms, amenities, gallery, location, and enquiry — in a single-page format.",
-    solution: "Built a mobile-first Next.js application with Tailwind CSS, custom CSS animations via IntersectionObserver, keyboard-navigable lightbox gallery, floating mobile CTA bar, and proper SEO metadata with structured data.",
-    architecture: ["Mobile-first responsive design", "Single-page scroll architecture", "Floating CTA bar on mobile", "Scroll-reveal animations with reduced-motion support"],
-    techStack: ["Next.js", "TypeScript", "Tailwind CSS", "Lucide React", "Google Maps"],
-    metrics: [
-      { label: "Google Rating", value: "4.1/5" },
-      { label: "Reviews", value: "528" },
-    ],
-    features: [
-      { title: "Mobile-first responsive design", description: "Optimized for mobile with a floating CTA bar for easy contact." },
-      { title: "Interactive gallery", description: "Keyboard-navigable lightbox with smooth transitions." },
-      { title: "Enquiry form", description: "Contact form with validation and simulated submission." },
-      { title: "Accessibility", description: "Focus-visible, semantic HTML, and ARIA labels for all users." },
-    ],
-    featured: true,
-    accentColor: "linear-gradient(135deg, #f59e0b 0%, #d97706 100%)",
-    image: "/projects/sripaadha-inn.png",
-    liveUrl: "https://sripaadha-inn-website.vercel.app",
-    githubUrl: "https://github.com/kovvurujavidh/sripaadha-inn-website"
   }
 ];
 
