@@ -37,7 +37,7 @@ export function Header() {
       }}
     >
       <div style={{ maxWidth: 1120, margin: "0 auto", padding: "0 20px", display: "flex", alignItems: "center", justifyContent: "space-between", height: 68 }}>
-        <Link href="/" style={{ display: "flex", alignItems: "center", gap: 10, fontWeight: 800, fontSize: 18, letterSpacing: "-0.02em" }}>
+        <Link href="/" style={{ display: "flex", alignItems: "center", gap: 10, fontWeight: 800, fontSize: 18, letterSpacing: "-0.02em", color: "var(--fg)" }}>
           <svg width="36" height="36" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
             <defs>
               <linearGradient id="logo-grad" x1="0%" y1="0%" x2="100%" y2="100%">
